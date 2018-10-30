@@ -1,0 +1,31 @@
+page-resinfo {
+
+    img{
+        width: 100%;
+		max-height: initial;
+		bottom: 50%;
+    }
+    
+    .resBanner{
+        display: block;
+        width: 100%;
+		overflow: hidden;
+        padding-top: 40px;
+		max-height: 175px;
+    }
+	
+	.mainContent {
+		height: 100%;
+	}
+    
+	.newEntrybutton {
+		font-size: 18px;
+	}
+    
+	.resourceTitle {
+		text-align: left;
+		margin-bottom: 5px;
+		font-weight: bold;
+		font-size: 20px;
+	}
+}

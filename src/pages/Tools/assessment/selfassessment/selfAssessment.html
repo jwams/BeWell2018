@@ -1,0 +1,105 @@
+<ion-header *ngIf="pageElementsLoaded">
+
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>{{pageElements.dailyEntryText}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<!-- Loading Div -->
+<div *ngIf="!pageElementsLoaded">
+	<ion-spinner></ion-spinner>
+</div>
+
+<ion-content padding *ngIf="pageElementsLoaded" class="has-header">
+
+    <h3 class="title">Where do you score?</h3>
+             
+    <div text-center>
+        <img src="../../../assets/imgs/MHCM.png" class="mainImg">         
+
+<!--   -->    
+    <form (ngSubmit)="saveData()">
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q1" name="Q1" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.moodText}}</ion-label>
+        </ion-range>
+    </ion-item>      
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q2" name="Q2" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.dietText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q3" name="Q3" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.sleepText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q4" name="Q4" color="stressColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.stressText}}</ion-label>
+        </ion-range>
+    </ion-item>       
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q5" name="Q5" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.moodText}}</ion-label>
+        </ion-range>
+    </ion-item>      
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q6" name="Q6" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.dietText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q7" name="Q7" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.sleepText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q8" name="Q8" color="stressColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.stressText}}</ion-label>
+        </ion-range>
+    </ion-item>       
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q9" name="Q9" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.moodText}}</ion-label>
+        </ion-range>
+    </ion-item>      
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q10" name="Q10" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.dietText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q11" name="Q11" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.sleepText}}</ion-label>
+        </ion-range>
+    </ion-item> 
+
+    <ion-item>
+        <ion-range min="1" max="10" [(ngModel)]="data.Q12" name="Q12" color="stressColor" pin="true" class="slider" (ionChange)="updateScores()">
+            <ion-label range-left>{{pageElements.stressText}}</ion-label>
+        </ion-range>
+    </ion-item>       
+
+        
+            <button ion-button type="submit" block>{{pageElements.saveDataText}}</button>
+        </form>
+    <ion-item>
+        <img src="../../../assets/imgs/Badges/"{{this.scoreBadge}} class="mainImg">  
+    </ion-item>
+    </div>
+</ion-content>

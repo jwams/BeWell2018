@@ -1,0 +1,140 @@
+<ion-header>
+    <ion-navbar hideBackButton="true" >
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+<!--        <ion-title>{{pageElements.resTitle}}</ion-title> -->
+		<ion-title *ngIf="languageFlagValue=='en'">Resources</ion-title>
+		<ion-title *ngIf="languageFlagValue=='fr'">Ressources</ion-title>
+		<ion-buttons end>
+            <button ion-button icon-only (click)="addData()" class="newEntrybutton">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+        
+</ion-header>
+             
+<ion-content class="mainContent">
+    
+	<div *ngIf="pageElementsLoaded">
+		<div class="resBanner">
+			<img src="assets/imgs/{{pageElements.imageName}}">  
+		</div>
+
+		<ion-grid padding>
+			
+			<ion-row>
+				<ion-col>
+					<p class="resourceTitle">{{pageElements.title}}</p>
+				</ion-col>
+			</ion-row>
+			
+			<!-- Main Paragraph -->
+			<ion-row *ngIf="pageElements.mainParagraph != ''">
+				<ion-col text-center>
+					<div attr.aria-label="{{pageElements.mainParagraphAriaLabel}}">
+						<p style="text-align: left; margin-bottom: 0">{{pageElements.mainParagraph}}</p>
+					</div>
+				</ion-col>
+			</ion-row>
+			
+			<!-- Main Paragraph2 -->
+			<ion-row *ngIf="pageElements.mainParagraph2 != ''">
+				<ion-col text-center>
+					<div attr.aria-label="{{pageElements.mainParagraph2AriaLabel}}">
+						<p style="text-align: left; margin-bottom: 0">{{pageElements.mainParagraph2}}</p>
+					</div>
+				</ion-col>
+			</ion-row>
+			
+			<!-- Main Paragraph Link -->
+			<ion-row *ngIf="pageElements.mainParagraphLinkContent != '' || pageElements.mainParagraphLinkContent != 'undefined'">
+				<ion-col text-center>
+					<div attr.aria-label="{{pageElements.mainParagraphLinkContentAriaLabel}}">
+						<span style="text-align: left; margin-bottom: 0"><a href="{{pageElements.mainParagraphLink}}">{{pageElements.mainParagraphLinkContent}}</a></span>
+					</div>
+				</ion-col>
+			</ion-row>
+
+			<!-- bulletPointHeader -->
+			<ion-row *ngIf="pageElements.bulletPointHeader != ''">
+				<ion-col col-md-3 offset-md-3>
+					<div attr.aria-label="{{pageElements.bulletPointHeaderAriaLabel}}">
+						{{pageElements.bulletPointHeader}}
+					</div>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col *ngIf="pageElements.bulletPoint1 != ''">
+					<ul style="margin-top: 0;">
+						<li *ngIf="pageElements.bulletPoint1 != ''" attr.aria-label="{{pageElements.bulletPoint1AriaLabel}}">{{pageElements.bulletPoint1}}</li>
+						<li *ngIf="pageElements.bulletPoint2 != ''" attr.aria-label="{{pageElements.bulletPoint2AriaLabel}}">{{pageElements.bulletPoint2}}</li>
+							<ul *ngIf="pageElements.bulletPoint2SubPoint1 != ''">
+								<li *ngIf="pageElements.bulletPoint2SubPoint1 != ''" attr.aria-label="{{pageElements.bulletPoint2SubPoint1AriaLabel}}">{{pageElements.bulletPoint2SubPoint1}}</li>
+								<li *ngIf="pageElements.bulletPoint2SubPoint2 != ''" attr.aria-label="{{pageElements.bulletPoint2SubPoint2AriaLabel}}">{{pageElements.bulletPoint2SubPoint2}}</li>
+								<li *ngIf="pageElements.bulletPoint2SubPoint3 != ''" attr.aria-label="{{pageElements.bulletPoint2SubPoint3AriaLabel}}">{{pageElements.bulletPoint2SubPoint3}}</li>
+							</ul>
+						<li *ngIf="pageElements.bulletPoint3 != ''" attr.aria-label="{{pageElements.bulletPoint3AriaLabel}}">{{pageElements.bulletPoint3}}</li>
+						<li *ngIf="pageElements.bulletPoint4 != ''" attr.aria-label="{{pageElements.bulletPoint4AriaLabel}}">{{pageElements.bulletPoint4}}</li>
+						<li *ngIf="pageElements.bulletPoint5 != ''" attr.aria-label="{{pageElements.bulletPoint5AriaLabel}}">{{pageElements.bulletPoint5}}</li>
+						<li *ngIf="pageElements.bulletPoint6 != ''" attr.aria-label="{{pageElements.bulletPoint6AriaLabel}}">{{pageElements.bulletPoint6}}</li>
+						<li *ngIf="pageElements.bulletPoint7 != ''" attr.aria-label="{{pageElements.bulletPoint7AriaLabel}}">{{pageElements.bulletPoint7}}</li>
+					</ul>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row *ngIf="pageElements.secondListMainParagraph != ''">
+				<ion-col text-center>
+					<div attr.aria-label="{{pageElements.secondListMainParagraphAriaLabel}}">
+						<p style="text-align: left; margin-bottom: 0; margin-top: 0;">{{pageElements.secondListMainParagraph}}</p>
+					</div>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row *ngIf="pageElements.secondListTitle != ''">
+				<ion-col>
+					<span style="margin-bottom: 0;" attr.aria-label="{{pageElements.secondListTitleAriaLabel}}">{{pageElements.secondListTitle}}</span>
+					<ul>
+						<li *ngIf="pageElements.secondListBulletPoint1 != ''" attr.aria-label="{{pageElements.secondListBulletPoint1AriaLabel}}">{{pageElements.secondListBulletPoint1}}</li>
+						<li *ngIf="pageElements.secondListBulletPoint2 != ''" attr.aria-label="{{pageElements.secondListBulletPoint2AriaLabel}}">{{pageElements.secondListBulletPoint2}}</li>
+						<li *ngIf="pageElements.secondListBulletPoint3 != ''" attr.aria-label="{{pageElements.secondListBulletPoint3AriaLabel}}">{{pageElements.secondListBulletPoint3}}</li>
+						<li *ngIf="pageElements.secondListBulletPoint4 != ''" attr.aria-label="{{pageElements.secondListBulletPoint4AriaLabel}}">{{pageElements.secondListBulletPoint4}}</li>
+						<li *ngIf="pageElements.secondListBulletPoint5 != ''" attr.aria-label="{{pageElements.secondListBulletPoint5AriaLabel}}">{{pageElements.secondListBulletPoint5}}</li>
+					</ul>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row *ngIf="pageElements.secondListFooter != ''">
+				<ion-col>
+					<span attr.aria-label="{{pageElements.secondListFooterAriaLabel}}">{{pageElements.secondListFooter}}</span>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row *ngIf="pageElements.secondListFooterParagraph != ''">
+				<ion-col>
+					<span attr.aria-label="{{pageElements.secondListFooterParagraphAriaLabel}}">{{pageElements.secondListFooterParagraph}}</span>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row style="margin-top: 15px;">
+				<ion-col text-center>
+					<a href="mailto:{{resEmail}}" class="buttonLink">
+						<button ion-button round outline class="rectBtn iconimg"><img style="width: 40px" src="../../assets/Icons/call.svg" /></button>
+					</a>
+				</ion-col>
+			</ion-row>
+			
+			<ion-row>
+				<ion-col text-center>
+					{{pageElements.contactName}}
+				</ion-col>
+			</ion-row>
+			
+		</ion-grid>
+	</div>		   
+</ion-content>
+

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" >
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+		<ion-title attr.aria-label="{{pageElements.dashboardText}}" *ngIf="pageElementsLoaded">{{pageElements.dashboardText}}</ion-title>
+		
+		<ion-buttons end>
+            <button ion-button icon-only (click)="addData()" class="newEntrybutton">
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content style="height: 100%">
+    <ion-grid *ngIf="pageElementsLoaded">
+		
+		<!-- From and To Dates -->
+		<ion-row>
+		
+			<!-- From Date -->
+			<ion-col col-md-5>
+				<ion-item>
+					<ion-label attr.aria-label="{{pageElements.fromDateText}}" class="titleText">{{pageElements.fromDateText}}</ion-label>
+					<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="fromDate"></ion-datetime>
+				</ion-item>
+			</ion-col>
+			
+			<!-- To Date -->
+			<ion-col col-md-5 offset-md-2>
+				<ion-item>
+					<ion-label attr.aria-label="{{pageElements.toDateText}}" class="titleText">{{pageElements.toDateText}}</ion-label>
+					<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="toDate"></ion-datetime>
+				</ion-item>
+			</ion-col>
+		</ion-row>	
+
+		<!-- Mood Checkbox -->
+		<ion-row>
+			<ion-col col-10>
+				<ion-item>
+					<ion-label style="font-size: 16px" attr.aria-label="{{pageElements.moodText}}">{{pageElements.moodText}}</ion-label>
+					<ion-checkbox color="moodColor" checked="false" [(ngModel)]="moodCheckbox"></ion-checkbox>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<!-- Diet Checkbox -->
+		<ion-row>
+			<ion-col col-10>
+				<ion-item>
+					<ion-label style="font-color: #4CAF50; font-size: 16px" attr.aria-label="{{pageElements.dietText}}">{{pageElements.dietText}}</ion-label>
+					<ion-checkbox color="dietColor" checked="false" [(ngModel)]="dietCheckbox"></ion-checkbox>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<!-- Sleep Checkbox -->
+		<ion-row>
+			<ion-col col-10>
+				<ion-item>
+					<ion-label style="font-color: #01579B; font-size: 16px" attr.aria-label="{{pageElements.fromDateText}}">{{pageElements.sleepText}}</ion-label>
+					<ion-checkbox color="sleepColor" checked="false" [(ngModel)]="sleepCheckbox"></ion-checkbox>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<div class="hr"></div>
+		<div *ngIf="!chartGenerated" style="color: grey; margin-top:30%;" text-center>- Graph Area -</div>
+
+		<!-- Graph -->
+		<div class="parent">
+			<div class="canvas-wrap" style="color: white">
+				<canvas id="mainChart" #mainChart></canvas>
+			</div>
+		</div>
+	</ion-grid>
+</ion-content>
+
+<ion-footer>
+
+	<!-- Generate Button -->
+	<ion-row>
+		<ion-col text-center>
+				<button *ngIf="pageElementsLoaded" ion-button (click)="generate(fromDate, toDate)">{{pageElements.generateText}}</button>
+		</ion-col>
+	</ion-row>
+</ion-footer>

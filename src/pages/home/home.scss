@@ -1,3 +1,40 @@
 page-home {
+    .has-header {
+    	margin-top: 44px;
+    }
+    
+    .MapleLeafImg{
+        height: auto;
+        width: 25%;
+        
+    }
+    .featureImg{
+        height: auto;
+        width: auto;
+        padding-top:  10px;
+    }
+    .titleHeader{
+        padding-top: 20px;
+    }
+	
+    .border {
+            border-style: solid;
+            border-width: 0.5px;
+    }
 
+    .checkinTimeCounter {
+            margin-top: 0;
+    }
+
+    .testBackground {
+            background: linear-gradient(to top right, #99ccff 0%, #ffffff 100%);
+    }
+	
+	.newEntrybutton {
+		font-size: 18px;
+	}
+	
+	.headerTitleText {
+		font-size: 8px;
+	}
 }

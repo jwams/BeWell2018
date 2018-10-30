@@ -1,0 +1,80 @@
+<ion-header *ngIf="pageElementsLoaded">
+    <ion-navbar hideBackButton="true" >
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+            <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title attr.aria-label="{{pageElements.AssProgTitleText}}" >{{pageElements.AssProgTitleText}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<!-- Loading Div --> 
+<div *ngIf="!pageElementsLoaded">
+    <ion-spinner></ion-spinner>
+</div>
+
+<ion-content padding *ngIf="pageElementsLoaded" class="has-header">
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                
+                <h4 attr.aria-label="{{pageElements.maintitle}}">{{pageElements.maintitle}}</h4> 
+                <br><br>
+                
+                <ion-card class = "cardPadding">
+                    <ion-row>
+                    <div class ="cardH5" attr.aria-label="{{pageElements.title1}}">{{pageElements.title1}}</div> 
+                    <p attr.aria-label="{{pageElements.paragraph1Text}}">{{pageElements.paragraph1Text}}</p>
+                    </ion-row>
+                </ion-card>
+                
+                <ion-card class = "cardPadding">
+                    <ion-row>
+                    <div class ="cardH5" attr.aria-label="{{pageElements.title2}}">{{pageElements.title2}}</div> 
+                    <p attr.aria-label="{{pageElements.paragraph2Text}}">{{pageElements.paragraph2Text}}</p> 
+                    </ion-row>
+                </ion-card>
+                
+                <ion-card class = "cardPadding">
+                    <ion-row>
+                    <div class ="cardH5" attr.aria-label="{{pageElements.title3}}">{{pageElements.title3}}</div> 
+                    <p attr.aria-label="{{pageElements.paragraph3Text}}">{{pageElements.paragraph3Text}}</p> 
+                    </ion-row> 
+                </ion-card>    
+                
+                <ion-card class = "cardPadding">
+                    <ion-row>        
+                    <div class ="cardH5" attr.aria-label="{{pageElements.title4}}">{{pageElements.title4}}</div> 
+                    <p attr.aria-label="{{pageElements.paragraph4Text}}">{{pageElements.paragraph4Text}}</p> 
+                    </ion-row>
+                </ion-card>
+                
+                <ion-card class = "cardPadding">
+                    <ion-row>        
+                    <div class ="cardH5" attr.aria-label="{{pageElements.title5}}">{{pageElements.title5}}</div> 
+                    <p attr.aria-label="{{pageElements.paragraph5Text}}">{{pageElements.paragraph5Text}}</p>
+                    </ion-row>
+                </ion-card>
+                
+<!--            <ion-card class = "cardPadding">
+                    <ion-row>                  
+                        <div class ="cardH5"> {{pageElements.title6}}</div> 
+                        <p>{{pageElements.paragraph6Text}}</p>
+                    </ion-row>
+                </ion-card>
+-->                               
+            </ion-col>
+        </ion-row> 
+            
+        <ion-row class = "padbutton"> 
+            <h5>{{pageElements.moreHelpfulLinksText}}</h5>                                      
+                <button ion-button block [navPush]="resPublic">{{pageElements.bottomButton}}</button>
+        </ion-row>
+        
+    </ion-grid>
+   
+</ion-content>
+
+

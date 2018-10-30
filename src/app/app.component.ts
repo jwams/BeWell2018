@@ -1,22 +1,110 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
+
+import { Events } from 'ionic-angular';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// Import for Translation Service
+import { TranslationService } from '../assets/services/translationService';
+
+import { Storage } from '@ionic/storage';
+
 import { HomePage } from '../pages/home/home';
+import { Login } from '../pages/home/Login/login/login';
+import { WellnessTracker } from '../pages/WellnessTracker/wellnesstracker';
+import { Dashboard } from '../pages/Dashboard/analyticDashboard';
+
+import { LanguageSelection } from '../pages/languageSelection/languageSelection';
+import { SignOut } from '../pages/home/Login/signout/signout';
+import { Resources } from '../pages/Resources/resources';
+import { ResInfo } from '../pages/Resources/ResPages/resinfo';
+import { Updates } from '../pages/updates/updates';
+
+import { Tools } from '../pages/Tools/tools';
+import { SelfAssessment } from '../pages/Tools/assessment/selfassessment/selfAssessment';
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+    @ViewChild(Nav) nav: Nav;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
+    rootPage: any = LanguageSelection;
+
+//    rootPage: any = HomePage;
+//    rootPage: any = Resources;
+//  rootPage: any = ResInfo;  
+    // The actual content of the page, fetched via translationService.ts
+    private pageElements: any;
+
+    // Controls whether our view is loaded based off of if pageElements has been loaded
+    private pageElementsLoaded: boolean = false;   
+
+    private userID: string;
+
+    private home: any;
+
+    pages: Array<{title: string, component: any, icon: string}>;
+
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private storage: Storage, private translationService: TranslationService, events: Events) {
+        this.initializeApp();
+        this.configuration();
+        
+        events.subscribe('languageFlag:changed', languageFlagRetrieval => {
+            this.pageElements = this.translationService.load("app.component.ts", languageFlagRetrieval);
+            this.buildMenu();
+        })
+    }
+
+    initializeApp() {
+        this.platform.ready().then(() => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+        });
+    }
+
+    openPage(page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.nav.setRoot(page);
+    }
+
+    configuration() {	
+        // Fetch the content from our language translation service
+        var languageFlagRetrieval = this.storage.get("languageFlag").then((value) => {
+            if(value != null) {
+                this.pageElements = this.translationService.load("app.component.ts", value);
+                this.pageElementsLoaded = true;
+                this.buildMenu();
+            } else {
+                console.log("No language flag set");
+            }	
+        });
+    }
+
+    buildMenu(){
+        console.log("Building Menu");
+        console.log(this.pageElements);
+
+        this.pages = [
+			{ title: 'FR/EN', component: LanguageSelection, icon: "list" },
+            { title: this.pageElements.help, component: LanguageSelection, icon: "information-circle" },
+            { title: this.pageElements.logout, component: SignOut, icon: "log-out" }
+        ];
+		console.log(this.pages[0]);
+        /*this.pages = [
+            { title: "Home", component: HomePage },
+//          { title: 'Wellness Tracker', component: WellnessTracker },
+            { title: "Tools", component: Tools },
+            { title: "Resources", component: Resources },
+            { title: "Updates", component: Updates },
+            { title: 'FR/EN', component: LanguageSelection },
+            { title: "Sign Out", component: SignOut }
+        ];*/     
+    }
 }
-

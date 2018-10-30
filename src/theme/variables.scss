@@ -22,7 +22,32 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
+// Added by Tim Jodoin  18-07-2018   )  
+// $app-background: linear-gradient(to bottom, color($colors, light) 0%, color($colors, dark) 100%);
+//$app-background: linear-gradient(to bottom, color(grey, light) 0%, color(white, dark) 100%);
 
+$app-background: linear-gradient(80deg, #E9EEF2, #FBFCFD 50%),
+                    linear-gradient(217deg, #FBFCFD, #E9EEF2 70.71%),
+                    linear-gradient(127deg, #E9EEF2, #FBFCFD 70.71%),
+                    linear-gradient(336deg, #FBFCFD, #E9EEF2 70.71%);
+
+$app-toolbar:   linear-gradient(to right, #002E5D, #6CACE4);
+
+$app-menu-content: linear-gradient(to bottom left, #002E5D, #6CACE4);
+$app-menu-title: #ffffff;
+
+
+$background-color: transparent;
+$toolbar-background: transparent;
+
+$toolbar-ios-title-font-size: 18px;
+$toolbar-md-title-font-size: 18px;
+$toolbar-wp-button-font-size: 18px;
+
+// Toolbar sizes
+$toolbar-ios-title-font-size: 2.1rem;
+$toolbar-md-title-font-size: 2.1rem;
+$toolbar-wp-title-font-size: 2.1rem;
 
 
 // Named Color Variables
@@ -34,11 +59,16 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  primary:    	#488aff,
+  secondary:  	#32db64,
+  danger:     	#f53d3d,
+  light:      	#f4f4f4,
+  dark:       	#222,
+  moodColor:	#FF9800,
+  dietColor:	#4CAF50,
+  stressColor:	#D32F2F,
+  sleepColor: 	#01579B,
+  GenericColor: #002E5D
 );
 
 
