@@ -43,11 +43,20 @@ export class DailyEntry {
     private userID: string;
 
     private openDatabase: SQLiteObject;
+	
+	data = { 
+		dateTime: moment().format(), 
+		date: moment().format(), 
+		moodScore: 5, 
+		dietScore: 5, 
+		sleepScore: 5, 
+		stressScore: 5, 
+		entryNote: ""
+	};
+	
+	private totalScore: number = Math.floor((this.data.moodScore + this.data.sleepScore + this.data.dietScore)/3);
 
     // ------------------------- Page Specific Variables ------------------------- //
-
-    data = { dateTime: moment().format(), date: moment().format(), moodScore:5, dietScore:5, sleepScore:5, stressScore:5, entryNote:"" };
-
     constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private toast: Toast, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
         this.authenticate();
         this.configuration();
