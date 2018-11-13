@@ -54,7 +54,7 @@ export class DailyEntry {
 		entryNote: ""
 	};
 	
-	private totalScore: number = Math.floor((this.data.moodScore + this.data.sleepScore + this.data.dietScore)/3);
+	private totalScore: number = 7;
 
     // ------------------------- Page Specific Variables ------------------------- //
     constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private toast: Toast, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
@@ -90,7 +90,7 @@ export class DailyEntry {
     }
 
     updateScores(selectedValue: any) {
-        console.log("HIT");
+        this.totalScore = Math.floor((this.data.moodScore + this.data.sleepScore + this.data.dietScore)/3);
     }
     
 
