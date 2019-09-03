@@ -77,7 +77,7 @@
             </ion-item>    -->   
 
             <ion-item no-lines>
-                <ion-input type="text" placeholder="Description" class="rectTxBx" [(ngModel)]="data.entryNote" name="entryNote" required="" attr.aria-label="{{pageElements.descriptionInput}}"></ion-input>
+                <ion-textarea type="text" placeholder="Description" class="rectTxBx" rows="4" [(ngModel)]="data.entryNote" name="entryNote" required="" attr.aria-label="{{pageElements.descriptionInput}}" onfocus="window.scrollTo(0,0)"></ion-textarea>
             </ion-item>
 
             <ion-row>

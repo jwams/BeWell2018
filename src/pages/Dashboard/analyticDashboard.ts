@@ -23,6 +23,7 @@ import { AlertController } from 'ionic-angular';
 
 // Page Imports
 import { Login } from '../home/Login/login/login';
+import { DailyEntry } from '../WellnessTracker/DailyEntry/dailyEntry';
 
 // JS Imports
 import * as moment from 'moment';
@@ -103,6 +104,10 @@ export class Dashboard {
                 console.log("Failed to find language flag");
             }
         });		
+    }
+	
+	addData() {
+        this.navCtrl.push(DailyEntry);
     }
 
     // Shows alert based on the title, subtitle, and button text supplied

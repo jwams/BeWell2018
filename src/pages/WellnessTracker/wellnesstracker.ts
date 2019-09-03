@@ -76,6 +76,10 @@ export class WellnessTracker {
 		});
     }
 	
+	addData() {
+        this.navCtrl.push(DailyEntry);
+    }
+	
 	//POP a page off the menu stack               
     goBack() {
         this.navCtrl.pop();

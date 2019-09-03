@@ -99,8 +99,7 @@ export class TranslationService {
 
 				case "wellnesstracker.html": {
 					return {
-						resourceTitleText: "Wellness Tracker",
-						resPageText: "Choose the resource list that applies to you",
+						wellnessTrackerTitleText: "Wellness Tracker",
 						buttonText1: "Daily Log",
 						buttonText2: "Graph",
 					}
@@ -133,7 +132,7 @@ export class TranslationService {
 								
 				case "checkinLog.html": {
 					return {
-						checkinLogText: "Checkin Log",
+						checkinLogText: "Check-in Log",
 						moodText: "Mood",
 						dietText: "Diet",
 						sleepText: "Sleep",
@@ -408,7 +407,8 @@ export class TranslationService {
 						secondListFooterParagraph: "",
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact ???",
-						imageName: "DSC_0848.jpg"
+						imageName: "DSC_0848.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -462,6 +462,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact Employee Assistance Program",
 						imageName: "36431210_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -515,6 +516,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact GEN-EAP-CISM",
 						imageName: "39280824_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -568,6 +570,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact GEN-NAT-DTA-OPDMA",
 						imageName: "43276279_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -621,6 +624,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "TDD service description",
 						contactName: "Contact Employee Assistance Program",
 						imageName: "30051199_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -674,6 +678,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact GEN-NAT Harrassment Prvention Harcèlement",
 						imageName: "33867343_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -727,6 +732,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact GEN-NAT-NAMP-PNGA",
 						imageName: "47382242_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -780,6 +786,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact OCM: GEN-NHQ OCM-BGC",
 						imageName: "52115462_l.jpg",
+						hideContactButton: false
 					}
 				}
 						
@@ -833,6 +840,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact GEN RTW-PRT",
 						imageName: "82795851_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -886,12 +894,13 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact",
 						imageName: "easObj.png",
+						hideContactButton: false
 					}
 				}
 				
 				case "LifeSpeak": {
 					return {
-						title: "LifeSpeak",
+						title: "Learn about well-being",
 						callnowText: "",
 						mainParagraph: "LifeSpeak is web-based service that delivers a “total wellness” platform to help you be present, productive and thriving at work and in life.  It includes over 260 short videos delivered by leading experts on various subjects such as anxiety, nutrition, addictions and relationships. You will find tip sheets, practical strategies and new content campaigns on a regular basis. It is anonymous and can be accessed from anywhere, at any time, on any device with an internet connection. ",
 						mainParagraphAriaLabel: "LifeSpeak Summary",
@@ -942,6 +951,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact ???",
 						imageName: "lifespeakBanner.jpg",
+						hideContactButton: true
 					}
 				}
 		
@@ -1301,7 +1311,8 @@ export class TranslationService {
 						secondListFooterParagraph: "",
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact ???",
-						imageName: "DSC_0848.jpg"
+						imageName: "DSC_0848.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1355,6 +1366,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact Employee Assistance Program",
 						imageName: "36431210_l.jpg",
+						hideContactButton: false
 					}
 				}
 					
@@ -1408,6 +1420,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Bouton de contact : GEN EAP-CISM/PAE-GSIC",
 						imageName: "39280824_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1460,7 +1473,8 @@ export class TranslationService {
 						secondListFooterParagraph: "",
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Bouton de contact : GEN-NAT-DTA-OPDMA",
-						imageName: "43276279_l.jpg"
+						imageName: "43276279_l.jpg",
+						hideContactButton: false
 					}
 				}
 
@@ -1514,6 +1528,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "TDD service description",
 						contactName: "Appel Le Programme d’aide aux employés",
 						imageName: "30051199_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1567,6 +1582,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Communiquez avec le PPH à l’adresse suivante : GEN-NAT Harassment Prevention Harcèlement2",
 						imageName: "33867343_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1620,6 +1636,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Bouton de contact par courriel : GEN-NAT-NAMP-PNGA",
 						imageName: "47382242_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1673,6 +1690,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Communiquez avec le BGC à l’adresse suivante : GEN-NHQ OCM-BGC",
 						imageName: "52115462_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1726,6 +1744,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Bouton de contact : GEN RTW-PRT",
 						imageName: "82795851_l.jpg",
+						hideContactButton: false
 					}
 				}
 				
@@ -1779,6 +1798,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact",
 						imageName: "easObj.png",
+						hideContactButton: false
 					}
 				}
 				
@@ -1835,6 +1855,7 @@ export class TranslationService {
 						secondListFooterParagraphAriaLabel: "",
 						contactName: "Contact ???",
 						imageName: "lifespeakBanner.jpg",
+						hideContactButton: true
 					}
 				}
 				
