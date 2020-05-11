@@ -20,6 +20,7 @@ import { Login } from './Login/login/login';
 import { DailyEntry } from '../WellnessTracker/DailyEntry/dailyEntry'; // home.html
 import { CheckinLog } from '../WellnessTracker/CheckinLog/checkinLog'; // home.html
 import { Resources } from '../Resources/resources'; // home.html
+import { SqlTester } from '../SQLTester/SqlTester';
 
 @Component({
     selector: 'page-home',
@@ -32,6 +33,7 @@ export class HomePage {
     resources = Resources;
     dailyentry = DailyEntry;
     checkinlog = CheckinLog;
+	sqlTester = SqlTester;
 
     // The actual content of the page, fetched via translationService.ts
     private pageElements: Object;

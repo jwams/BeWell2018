@@ -16,6 +16,8 @@ import { AlertController } from 'ionic-angular';
 // Import for Translation Service
 import { TranslationService } from './../../../assets/services/translationService';
 
+import * as CryptoJS from 'crypto-js';
+
 // ------------------------- Page Specific Imports ------------------------- //
 
 // Import Login
@@ -49,6 +51,8 @@ export class CheckinLogInfo {
     private pageElementsLoaded: boolean = false;
 
     private userID: string;
+	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 
     // ------------------------- Page Specific Variables ------------------------- //
 
@@ -61,6 +65,14 @@ export class CheckinLogInfo {
         this.authenticate();
         this.configuration();
     }
+
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value, this.key).toString();
+	}
 
     configuration() {
 
@@ -99,10 +111,11 @@ export class CheckinLogInfo {
 
             this.openDatabase = db;
 
-            this.openDatabase.executeSql('SELECT * FROM wellness WHERE rowid = ?', [this.checkinLogID])
+            this.openDatabase.executeSql('SELECT * FROM wellness WHERE rowid = ?', [this.encrypt(this.checkinLogID)])
                     .then(res => {
                         console.log(this.checkinLogID);
                         this.userRecords = res.rows.item(0);
+						
                         if(this.userRecords.date.indexOf("T") == -1) {
                             console.log("userRecords[0].Date is in wrong format, fixing now");
                             this.userRecords.date = this.userRecords.date.substring(0, this.userRecords.date.indexOf(" ")) + "T" + this.userRecords.date.substring((this.userRecords.date.indexOf(" ")+1));

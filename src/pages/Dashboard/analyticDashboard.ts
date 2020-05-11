@@ -29,6 +29,8 @@ import { DailyEntry } from '../WellnessTracker/DailyEntry/dailyEntry';
 import * as moment from 'moment';
 import * as Chart from 'chart.js';
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
     selector: 'page-analyticDashboard',
     templateUrl: 'analyticDashboard.html'
@@ -49,6 +51,8 @@ export class Dashboard {
 
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
+	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 
     // ------------------------- Page Specific Variables ------------------------- //
 
@@ -126,19 +130,27 @@ export class Dashboard {
 
         // Checks to see if a single checkbox has been checked, if not, show alert, then return false
         if(!this.moodCheckbox && !this.dietCheckbox && !this.sleepCheckbox) {
-                this.showAlert("Whoops!", "You don't have a score checkbox checked!", "Right on!");
-                return false;
+			this.showAlert("Whoops!", "You don't have a score checkbox checked!", "Right on!");
+			return false;
         }
 
         // Checks to see if both dates are valid, if not, show alert, and return false
         if(this.fromDate == null || this.toDate == null) {
-                this.showAlert("Whoops!", "You haven't selected both a from-date and to-date", "For sure!");
-                return false;
+			this.showAlert("Whoops!", "You haven't selected both a from-date and to-date", "For sure!");
+			return false;
         }
 
         // All checks came back false, so the input is valid, return true
         return true;
     }
+	
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
+	}
 
     // Generates a chart based off data from view
     generate(fromDate, toDate) {
@@ -184,6 +196,9 @@ export class Dashboard {
             // Turn them into a string object so we can use them in our queries
             fromDate = finalFromDate.toString();
             toDate = finalToDate.toString();
+			
+			console.log("fromDate: " + fromDate);
+			console.log("toDate: " + toDate);
 
             // ----------- Combining above data to form queries ----------- //
 
@@ -209,6 +224,8 @@ export class Dashboard {
                 var dietScoreArray = [];
                 var sleepScoreArray = [];
 
+				console.log("Res: " + res);
+
                 // Loop through graph data gathered above, and seperate it into categories
                 for(var i=0; i< res.rows.length; i++) {
 					
@@ -221,15 +238,15 @@ export class Dashboard {
                     labelsArray[i] = moment(res.rows.item(i).date).format('h:mm a, MMM DD, YYYY');
 
                     if(this.moodCheckbox) {
-						moodScoreArray[i] = res.rows.item(i).moodScore;
+						moodScoreArray[i] = this.decrypt(res.rows.item(i).moodScore);
                     }
 
                     if(this.dietCheckbox) {
-						dietScoreArray[i] = res.rows.item(i).dietScore;
+						dietScoreArray[i] = this.decrypt(res.rows.item(i).dietScore);
                     }
 
                     if(this.sleepCheckbox) {
-						sleepScoreArray[i] = res.rows.item(i).sleepScore;
+						sleepScoreArray[i] = this.decrypt(res.rows.item(i).sleepScore);
                     }
                 }
 
@@ -290,6 +307,9 @@ export class Dashboard {
                 // Fetch our 2D context for our graph, this is required when creating the graph
                 this.context = ( <HTMLCanvasElement> this.pageElement.nativeElement).getContext('2d');
 				
+				console.log("datasetsObject:");
+				console.log(datasetsObject);
+				
                 // Generate Chart
                 var mainChart = new Chart(this.context, {
 
@@ -323,20 +343,20 @@ export class Dashboard {
     // Initializes our DB, and fetchs all user records storing them in userRecords[]
     initDB() {
         this.sqlite.create({
-            name: this.userID +".db",
+            name: this.userID + ".db",
             location: 'default'
         }).then((db: SQLiteObject) => {
 
             this.openDatabase = db;
 
-            this.openDatabase.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID INT, date TEXT, moodScore INT, dietScore INT, sleepScore INT, entryNote TEXT)', {} as any)
+            this.openDatabase.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID TEXT, date TEXT, moodScore TEXT, dietScore TEXT, sleepScore TEXT)', {} as any)
             .then(res => console.log('Executed SQL'))
             .catch(e => console.log(e));
 
             this.openDatabase.executeSql('SELECT * FROM wellness ORDER BY rowid DESC', {} as any).then(res => {
 				this.userRecords = [];
 				for(var i=0; i<res.rows.length; i++) {
-					this.userRecords.push({rowid:res.rows.item(i).rowid,date:res.rows.item(i).date,moodScore:res.rows.item(i).moodScore,dietScore:res.rows.item(i).dietScore,sleepScore:res.rows.item(i).sleepScore,entryNote:res.rows.item(i).entryNote})
+					this.userRecords.push({rowid:res.rows.item(i).rowid, date:res.rows.item(i).date, moodScore: this.decrypt(res.rows.item(i).moodScore), dietScore: this.decrypt(res.rows.item(i).dietScore), sleepScore: this.decrypt(res.rows.item(i).sleepScore)})
 				}
             }).catch(e => console.log(e));
         }).catch(e => console.log(e));

@@ -13,6 +13,8 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';  //services for SQL
 // Import for Translation Service
 import { TranslationService } from './../../../assets/services/translationService';
 
+import * as CryptoJS from 'crypto-js';
+
 // ------------------------- Page Specific Imports ------------------------- //
 
 // Page Imports
@@ -45,6 +47,8 @@ export class CheckinLog {
 	private date: String = new Date("Fri Apr 3 15:48:21 2018 GMT").toISOString();
 	
     private userID: string;
+	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";	
 
     // ------------------------- Page Specific Variables ------------------------- //
 	
@@ -142,16 +146,24 @@ export class CheckinLog {
 	    // Fetch the content from our language translation service
         var languageFlag = this.storage.get("languageFlag").then((value) => {
             if(value != null) {
-                this.pageElements = this.translationService.load("checkinLog.html", value);
-                this.pageElementsLoaded = true;
                 this.initDB();
+				this.pageElements = this.translationService.load("checkinLog.html", value);
+                this.pageElementsLoaded = true;
             } else {
                 console.log("No language flag set");
             }			
         });
 		
-		this.showHideArray = Array(this.userRecords.length).fill(false);
+		
     }
+	
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value, this.key).toString();
+	}
 	
 	// Shows/Hides the element selected, this function also hides all the rest of the open logs
 	showHideElement(index) {
@@ -167,11 +179,11 @@ export class CheckinLog {
 
     initDB() {
         this.sqlite.create({
-                name: this.userID +".db",
+                name: this.userID + ".db",
                 location: 'default'
         }).then((db: SQLiteObject) => {
 
-            db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID INT, date TEXT, moodScore INT, dietScore INT, sleepScore INT, stressScore INT, entryNote TEXT)', {} as any)
+            db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID TEXT, date TEXT, moodScore TEXT, dietScore TEXT, sleepScore TEXT)', {} as any)
                 .then(res => {
                         this.openDatabase = db;
                         console.log('Executed SQL');
@@ -184,12 +196,11 @@ export class CheckinLog {
         this.openDatabase.executeSql('SELECT * FROM wellness ORDER BY rowid DESC', {} as any).then(res => {
             this.userRecords = [];
             for(var i=0; i<res.rows.length; i++) {
-                this.userRecords.push({rowid:res.rows.item(i).rowid,date:res.rows.item(i).date,moodScore:res.rows.item(i).moodScore,dietScore:res.rows.item(i).dietScore,sleepScore:res.rows.item(i).sleepScore,stressScore:res.rows.item(i).stressScore,entryNote:res.rows.item(i).entryNote});
-                if(this.userRecords[i].date.indexOf("T") == -1) {
-                    console.log("userRecords[" + i + "].Date is in wrong format, fixing now");
-                    this.userRecords[i].date = this.userRecords[i].date.substring(0, this.userRecords[i].date.indexOf(" ")) + "T" + this.userRecords[i].date.substring((this.userRecords[i].date.indexOf(" ")+1));
-                }
+				this.userRecords.push({rowid:res.rows.item(i).rowid, date:res.rows.item(i).date, moodScore: this.decrypt(res.rows.item(i).moodScore), dietScore: this.decrypt(res.rows.item(i).dietScore), sleepScore: this.decrypt(res.rows.item(i).sleepScore)})
             }
+			console.log("this.userRecords.length: " + this.userRecords.length);
+			this.showHideArray = Array(this.userRecords.length).fill(false);
+			
             console.log("User Records:");
             console.log(this.userRecords);
         }).catch(e => console.log(e));

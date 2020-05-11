@@ -72,20 +72,21 @@
 		<div *ngIf="!chartGenerated" style="color: grey; margin-top:30%;" text-center>- Graph Area -</div>
 
 		<!-- Graph -->
-		<div class="parent">
-			<div class="canvas-wrap" style="color: white">
-				<canvas id="mainChart" #mainChart></canvas>
-			</div>
-		</div>
+		<ion-row *ngIf="chartGenerated">
+			<ion-col>
+				<div class="parent">
+					<div class="canvas-wrap" style="color: white">
+						<canvas id="mainChart" #mainChart></canvas>
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+		
+		<!-- Generate Button -->
+		<ion-row>
+			<ion-col text-center>
+					<button *ngIf="pageElementsLoaded" ion-button (click)="generate(fromDate, toDate)">{{pageElements.generateText}}</button>
+			</ion-col>
+		</ion-row>
 	</ion-grid>
 </ion-content>
-
-<ion-footer>
-
-	<!-- Generate Button -->
-	<ion-row>
-		<ion-col text-center>
-				<button *ngIf="pageElementsLoaded" ion-button (click)="generate(fromDate, toDate)">{{pageElements.generateText}}</button>
-		</ion-col>
-	</ion-row>
-</ion-footer>

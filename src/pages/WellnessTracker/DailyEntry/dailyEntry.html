@@ -19,7 +19,7 @@
         <ion-row>
             <ion-col>
                 <div text-center>
-                    <img src="../../../assets/imgs/feelings/face{{totalScore}}.png" class="feelingImg">         
+                    <img src="./assets/imgs/feelings/face{{totalScore}}.png" class="feelingImg">         
                 </div>
             </ion-col>
         </ion-row>
@@ -76,13 +76,9 @@
                 </ion-range>
             </ion-item>    -->   
 
-            <ion-item no-lines>
-                <ion-textarea type="text" placeholder="Description" class="rectTxBx" rows="4" [(ngModel)]="data.entryNote" name="entryNote" required="" attr.aria-label="{{pageElements.descriptionInput}}" onfocus="window.scrollTo(0,0)"></ion-textarea>
-            </ion-item>
-
             <ion-row>
                 <ion-col text-center>
-                    <button ion-button round outline type="submit" class="rectBtn iconimg" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog"><img style="width: 30px;" src="../../assets/Icons/checkmark.svg" /></button>
+                    <button ion-button round outline type="submit" class="rectBtn iconimg" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog"><img style="width: 30px;" src="./assets/Icons/checkmark.svg" /></button>
                 </ion-col>
             </ion-row>
 

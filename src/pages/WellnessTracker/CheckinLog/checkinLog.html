@@ -26,19 +26,19 @@
 			<!-- Coloured Circle, depending on log score -->
 			<ion-col col-2>
 				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 23">
-					<img height="50px" width="50px" src="../../../assets/imgs/Badges/green.png">
+					<img height="50px" width="50px" src="./assets/imgs/Badges/green.png">
 				</div>
 				
 				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 16 && (wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 22">
-					<img height="50px" width="50px" src="../../../assets/imgs/Badges/orange.png">
+					<img height="50px" width="50px" src="./assets/imgs/Badges/orange.png">
 				</div>
 				
 				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 8 && (wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 15">
-					<img height="50px" width="50px" src="../../../assets/imgs/Badges/yellow.png">
+					<img height="50px" width="50px" src="./assets/imgs/Badges/yellow.png">
 				</div>
 				
 				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 8">
-					<img height="50px" width="50px" src="../../../assets/imgs/Badges/red.png">
+					<img height="50px" width="50px" src="./assets/imgs/Badges/red.png">
 				</div>
 			</ion-col>
 			
@@ -47,16 +47,6 @@
 				<!-- Date header -->
 				<ion-row style="padding-top: 8px" [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i]}">
 					{{wellness.date | date: "MMMM d, yyyy"}}
-				</ion-row>
-				
-				<!-- Entry note hidden -->
-				<ion-row *ngIf="!showHideArray[i]" style="padding: 0 10px 10px 0; height: 100%">
-					{{wellness.entryNote.substring(0, 26)}}<span *ngIf="wellness.entryNote.length > 26">...</span>
-				</ion-row>
-				
-				<!-- Entry note not hidden -->
-				<ion-row *ngIf="showHideArray[i]" style="padding: 0 10px 10px 0;">
-					{{wellness.entryNote}}
 				</ion-row>
 			</ion-col>
 			

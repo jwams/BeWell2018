@@ -32,7 +32,7 @@ import { EAP } from '../pages/Resources/ResPages/EAP/eap';
 import { EmpRev1 } from '../pages/Resources/Employee/Rev1/empRev1';
 import { EmpRev2 } from '../pages/Resources/Employee/Rev2/empRev2';
 import { EmpRev3 } from '../pages/Resources/Employee/Rev3/empRev3';
-
+import { SqlTester } from '../pages/SQLTester/SqlTester';
 import { Assessment } from '../pages/Tools/assessment/assessment';
 import { SelfAssessment } from '../pages/Tools/assessment/selfassessment/selfAssessment';
 
@@ -75,7 +75,8 @@ import { TranslationService } from '../assets/services/translationService';
         EAP,
         EmpRev1,
         EmpRev2,
-        EmpRev3
+        EmpRev3,
+		SqlTester
     ],
     imports: [
 	BrowserModule,
@@ -112,7 +113,8 @@ import { TranslationService } from '../assets/services/translationService';
         EAP,
         EmpRev1,
         EmpRev2,
-        EmpRev3
+        EmpRev3,
+		SqlTester
     ],
     providers: [
 	StatusBar,
@@ -120,6 +122,7 @@ import { TranslationService } from '../assets/services/translationService';
 	TranslationService,
 	{provide: ErrorHandler, useClass: IonicErrorHandler},
 	SQLite,
+	
 //	DatabaseService,
 	Toast
     ]

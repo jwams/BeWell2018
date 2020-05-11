@@ -18,6 +18,8 @@ import { NavController } from 'ionic-angular';
 
 import * as PH from "password-hash";
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
     selector: 'page-recoverUser',
     templateUrl: 'recoverUser.html'
@@ -57,6 +59,8 @@ export class RecoverUser {
     private inputNotFound: boolean;
     private invalidPin: boolean;
 	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
+	
     constructor(public navCtrl: NavController, private sqlite: SQLite, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
             this.configuration();
     }
@@ -86,6 +90,14 @@ export class RecoverUser {
         // Initialize our DB
         this.initDB();
     }
+	
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
+	}
 
     // Phase 1: Grab first name and check to see if it exists in our DB
     submitPhase1() {
@@ -134,8 +146,7 @@ export class RecoverUser {
             this.showAlert("Invalid Pin", "You pin needs to be between 4 and 50 characters!", "Right on");
             console.log("That pin is invalid");
         } else {
-            this.hashedPassword = PH.generate(this.pin); 
-            this.openDatabase.executeSql('UPDATE users SET pin = ? WHERE rowid= ?', [this.hashedPassword, this.userFoundID]).then(res => {
+            this.openDatabase.executeSql('UPDATE users SET pin = ? WHERE rowid= ?', [this.encrypt(this.pin), this.userFoundID]).then(res => {
                 console.log(this.userFoundID);
                 console.log("User pin successfully updated");
                 this.navCtrl.pop();
@@ -159,7 +170,7 @@ export class RecoverUser {
             db.executeSql('SELECT * FROM users ORDER BY rowid DESC', {} as any).then(res => {
                 this.userRecords = [];
                 for(var i=0; i<res.rows.length; i++) {
-                    this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:res.rows.item(i).firstName, pin:res.rows.item(i).pin, securityQuestion:res.rows.item(i).securityQuestion, securityAnswer:res.rows.item(i).securityAnswer})
+                    this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:this.decrypt(res.rows.item(i).firstName), pin:this.decrypt(res.rows.item(i).pin), securityQuestion:this.decrypt(res.rows.item(i).securityQuestion), securityAnswer:this.decrypt(res.rows.item(i).securityAnswer)})
                 }
                 console.log("User Records:");
                 console.log(this.userRecords);

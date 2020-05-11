@@ -16,6 +16,8 @@ import { TranslationService } from './../../../../assets/services/translationSer
 
 import * as PH from "password-hash";
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
     selector: 'page-newUser',
     templateUrl: 'newUser.html'
@@ -51,6 +53,10 @@ export class NewUser {
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
     
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
+	
+	private userID: String;
+	
     constructor(public navCtrl: NavController, private sqlite: SQLite, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
 
         // Fetch the content from our language translation service
@@ -78,8 +84,18 @@ export class NewUser {
         this.invalidSecurityAnswer = false;
 
         // Initialize our DB
+		console.log("HIT1");
         this.initDB();
     }
+
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		console.log("Encrypting: " + value + " into: " +  CryptoJS.AES.encrypt(value.toString(), this.key).toString());
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
+	}
 
     createUser() {
 
@@ -117,10 +133,7 @@ export class NewUser {
             alertShown = true;
             this.invalidPin = true;
             this.showAlert("Invalid Pin", "Your pin must be between 4 and 50 characters!", "Sounds good!");
-        }
-        else {
-            this.hashedPassword = PH.generate(this.pin); 
-        }                   
+        }                
 
         // Check to see if the security question is blank, if so, set the flag
         if(this.securityQuestion == "" && !alertShown) {
@@ -138,7 +151,18 @@ export class NewUser {
 
         // If all flags are false, execute the insert query
         if(!this.invalidName && !this.firstNameFound && !this.invalidPin && !this.invalidSecurityQuestion && !this.invalidSecurityAnswer) {
-            this.openDatabase.executeSql('INSERT INTO users(firstName, pin, securityQuestion, securityAnswer) VALUES (?,?,?,?)', [this.firstName, this.hashedPassword, this.securityQuestion, this.securityAnswer])
+			
+			var encryptedFirstName = this.encrypt(this.firstName);
+			var encryptedPin = this.encrypt(this.pin);
+			var encryptedSecurityQuestion = this.encrypt(this.securityQuestion);
+			var encryptedSecurityAnswer = this.encrypt(this.securityAnswer);
+			
+			console.log("encryptedFirstName: " + encryptedFirstName);
+			console.log("encryptedPin: " + encryptedPin);
+			console.log("encryptedSecurityQuestion: " + encryptedSecurityQuestion);
+			console.log("encryptedSecurityAnswer: " + encryptedSecurityAnswer);
+			
+            this.openDatabase.executeSql('INSERT INTO users(firstName, pin, securityQuestion, securityAnswer) VALUES (?,?,?,?)', [encryptedFirstName, encryptedPin, encryptedSecurityQuestion, encryptedSecurityAnswer])
                 .then(res => {
                     console.log("User added successfully");
 
@@ -166,26 +190,32 @@ export class NewUser {
 
             db.executeSql('SELECT * FROM users ORDER BY rowid DESC', {} as any).then(res => {
                 this.userRecords = [];
+				
+				/*console.log("newUser.html:");
+				console.log("RowID: " + res.rows.item(i).rowid);
+				console.log("firstName: " + res.rows.item(i).firstName);
+				console.log("pin: " + res.rows.item(i).pin);
+				console.log("securityQuestion: " + res.rows.item(i).securityQuestion);
+				console.log("securityAnswer: " + res.rows.item(i).securityAnswer);*/
                 for(var i=0; i<res.rows.length; i++) {
-                    this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:res.rows.item(i).firstName, pin:res.rows.item(i).pin, securityQuestion:res.rows.item(i).securityQuestion, securityAnswer:res.rows.item(i).securityAnswer})
-                }
-                console.log("User Records: TJ");
-                console.log("User Records: TJ", this.userRecords[1].pin);
-                console.log("User Records: TJ", (this.userRecords.length+1));                                
+                    this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:this.decrypt(res.rows.item(i).firstName), pin:this.decrypt(res.rows.item(i).pin), securityQuestion:this.decrypt(res.rows.item(i).securityQuestion), securityAnswer:this.decrypt(res.rows.item(i).securityAnswer)})
+                }                             
+				console.log("Test123: " + res.rows.length);
+				this.userID = (res.rows.length + 1).toString();
             }).catch(e => console.log(e));
         }).catch(e => console.log(e));
     }
 
     createWTtable(){
-        console.log("userid tj", this.userRecords.rowid)
+        console.log("userid:", this.userID)
 
         this.sqlite.create({
-            name: (this.userRecords.length+1) + ".db",
+            name: this.userID + ".db",
             location: 'default'
         }).then((db: SQLiteObject) => {
 
             this.openWTDatabase = db;
-                db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID INT, date TEXT, moodScore INT, dietScore INT, sleepScore INT, stressScore INT, entryNote TEXT)', {} as any)
+                db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID TEXT, date TEXT, moodScore TEXT, dietScore TEXT, sleepScore TEXT)', {} as any)
                 .then(res => console.log('Executed SQL'))
                 .catch(e => console.log(e));
                 console.log("wellness created.")

@@ -21,7 +21,7 @@
     
 	<div *ngIf="pageElementsLoaded">
 		<div class="resBanner">
-			<img src="assets/imgs/{{pageElements.imageName}}">  
+			<img src="./assets/imgs/{{pageElements.imageName}}">  
 		</div>
 
 		<ion-grid padding>
@@ -123,7 +123,7 @@
 			<ion-row style="margin-top: 15px;" *ngIf="!pageElements.hideContactButton">
 				<ion-col text-center>
 					<a href="mailto:{{resEmail}}" class="buttonLink">
-						<button ion-button round outline class="rectBtn iconimg"><img style="width: 40px" src="../../assets/Icons/call.svg" /></button>
+						<button ion-button round outline class="rectBtn iconimg"><img style="width: 40px" src="./assets/Icons/call.svg" /></button>
 					</a>
 				</ion-col>
 			</ion-row>

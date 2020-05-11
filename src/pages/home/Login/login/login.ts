@@ -28,6 +28,8 @@ import { HomePage } from '../../home'; // home.html
 
 import * as PH from "password-hash";
 
+import * as CryptoJS from 'crypto-js';
+
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html',
@@ -72,19 +74,38 @@ export class Login {
          
 	private fadeState: String = 'visible';
 	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
+	
+	//private aes256: any;
+	
     constructor(public navCtrl: NavController, private sqlite: SQLite, public alertCtrl: AlertController, private storage: Storage, private menu: MenuController, private translationService: TranslationService) {	
         this.authenticate();
         this.configuration();
+		let test1 = "2";
+		let test2 = CryptoJS.AES.encrypt(test1, "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ").toString();
+		let test3 = CryptoJS.AES.decrypt(test2, "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ").toString(CryptoJS.enc.Utf8);
+		
+		console.log("test1: " + test1);
+		console.log("test2: " + test2);
+		console.log("test3: " + test3);
 	}
 	
 	authenticate() {
-		
+
 		// Fetch our login flag and check it's value, if it exists, the user is already logged in
 		this.storage.get("userID").then((value) => {
 			if(value != null) {
 				this.navCtrl.setRoot(HomePage);
 			}
 		});
+	}
+	
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
 	}
 	
 	configuration() {
@@ -139,7 +160,8 @@ export class Login {
 				// Iterate through our records variable, if we have a match, take in the userID and return true
 				for(var i = 0; i < this.userRecords.length; i++) {				
 					if(this.userRecords[i].firstName == this.firstName) {
-						if(PH.verify((this.pin), this.userRecords[i].pin)){
+						console.log("Name match");
+						if(this.pin == this.userRecords[i].pin){
 							this.userID = this.userRecords[i].rowid;                                               
 							return true;
 						}
@@ -176,6 +198,9 @@ export class Login {
 	
 	// Creates a connection to our DB, performs the login process if given the login flag
 	initDB(loginFlag) {
+		
+		
+		
 		this.sqlite.create({
 			name: 'users_CSC.db',
 			location: 'default'
@@ -195,8 +220,15 @@ export class Login {
 
 					// Store them all in our userRecords variable
 					this.userRecords = [];
+					/*console.log("Login.html:");
+					console.log("RowID: " + res.rows.item(i).rowid);
+					console.log("firstName: " + res.rows.item(i).firstName);
+					console.log("pin: " + res.rows.item(i).pin);
+					console.log("securityQuestion: " + res.rows.item(i).securityQuestion);
+					console.log("securityAnswer: " + res.rows.item(i).securityAnswer);*/
 					for(var i=0; i<res.rows.length; i++) {
-						this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:res.rows.item(i).firstName, pin:res.rows.item(i).pin, securityQuestion:res.rows.item(i).securityQuestion, securityAnswer:res.rows.item(i).securityAnswer})
+						
+						this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:this.decrypt(res.rows.item(i).firstName), pin:this.decrypt(res.rows.item(i).pin), securityQuestion:this.decrypt(res.rows.item(i).securityQuestion), securityAnswer:this.decrypt(res.rows.item(i).securityAnswer)})
 					}
 
 					// If login flag is set, start our login checking process, we do it this way because our DB is retrieved as a promise. (Possibly explore better promise handling techniques in the future - JW) 

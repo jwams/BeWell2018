@@ -17,6 +17,8 @@ import { Storage } from '@ionic/storage';
 // Import for Translation Service
 import { TranslationService } from './../../../assets/services/translationService';
 
+import * as CryptoJS from 'crypto-js';
+
 // ------------------------- Page Specific Imports ------------------------- //
 // Page Imports
 import { Login } from '../../home/Login/login/login';
@@ -43,6 +45,8 @@ export class DailyEntry {
     private userID: string;
 
     private openDatabase: SQLiteObject;
+	
+	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
 	data = { 
 		dateTime: moment().format(), 
@@ -79,6 +83,16 @@ export class DailyEntry {
             }
         });
     }
+	
+	decrypt(value) {
+		console.log("Decrypting: " + value);
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
+	}
+	
+	encrypt(value) {
+		console.log("Encrypting: " + value + " into: " +  CryptoJS.AES.encrypt(value.toString(), this.key).toString());
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
+	}
 
     authenticate() {
         this.storage.get("userID").then((value) => {
@@ -100,7 +114,7 @@ export class DailyEntry {
             name: this.userID +".db",
             location: 'default'
         }).then((db: SQLiteObject) => {
-            db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID INT, date TEXT, moodScore INT, dietScore INT, sleepScore INT, stressScore INT, entryNote TEXT)', {} as any)
+            db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID TEXT, date TEXT, moodScore TEXT, dietScore TEXT, sleepScore TEXT)', {} as any)
             .then(res => {
                 console.log('Executed Create Table Wellness Query');
                 this.openDatabase = db;
@@ -111,13 +125,28 @@ export class DailyEntry {
     saveData() {
         
         if(this.openDatabase != undefined) {
-            
-            var fullDate = this.data.date.substring(0, this.data.date.indexOf("T")) + "T" + this.data.dateTime.substring((this.data.dateTime.indexOf("T")+1));
-            
-            this.openDatabase.executeSql('INSERT INTO wellness VALUES(NULL,?,?,?,?,?,?,?)',[this.userID, fullDate,this.data.moodScore,this.data.dietScore,this.data.sleepScore,this.data.stressScore,this.data.entryNote]).then(res => {this.navCtrl.pop()});
-        } else {
-            console.log("openDatabase isn't initialized");
-        }
+            try {
+				var fullDate = this.data.date.substring(0, this.data.date.indexOf("T")) + "T" + this.data.dateTime.substring((this.data.dateTime.indexOf("T")+1));
+				
+				console.log("HIT1");
+				console.log("UserID: " + this.userID);
+				console.log("fullDate: " + fullDate);
+				console.log("moodScore: " + this.encrypt(this.data.moodScore));
+				console.log("dietScore: " + this.encrypt(this.data.dietScore));
+				console.log("sleepScore: " + this.encrypt(this.data.sleepScore));
+				
+				this.openDatabase.executeSql('INSERT INTO wellness(userID, date, moodScore, dietScore, sleepScore) VALUES(?,?,?,?,?)',
+				[
+					this.userID, 
+					fullDate, 
+					this.encrypt(this.data.moodScore), 
+					this.encrypt(this.data.dietScore), 
+					this.encrypt(this.data.sleepScore)
+				]).then(res => {this.navCtrl.pop()});
+			} catch(e) {
+				console.log("ERROR: " + e);
+			}
+		}
     }
 
     // Shows alert based on the title, subtitle, and button text supplied

@@ -1,0 +1,67 @@
+<ion-content>
+		<ion-row>
+			DB Name
+			<ion-col text-center>
+				<ion-item>
+					<ion-input type="text" placeholder="" [(ngModel)]="dbName"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+    	<ion-row>
+			Select
+			<ion-col text-center>
+				<ion-item>
+					<ion-input type="text" placeholder="" [(ngModel)]="selectStatement"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<ion-row>
+			FROM
+			<ion-col text-center>
+				<ion-item>
+					<ion-input type="text" placeholder="" [(ngModel)]="fromStatement"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<ion-row>
+			WHERE
+			<ion-col text-center>
+				<ion-item>
+					<ion-input type="text" placeholder="" [(ngModel)]="whereStatement"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		
+		<ion-row>
+			<ion-col text-center>
+				<button ion-button (click)="initDB()">Run Query</button>
+			</ion-col>
+		</ion-row>
+		
+		<!--<ion-row *ngFor="let records of userRecords; index as i" [attr.data-index]="i">-->
+		<ion-row>
+			<ion-col>
+				{{records}}
+			</ion-col>
+			
+			<!--<ion-col>
+				<ion-row>
+					<ion-col style="border-style: solid; border-width: 1px">
+						userID
+					</ion-col>
+					
+					<ion-col style="border-style: solid; border-width: 1px">
+						date
+					</ion-col>
+					
+					<ion-col style="border-style: solid; border-width: 1px">
+						moodScore
+					</ion-col>
+				</ion-row>
+			</ion-col>-->
+
+		</ion-row>
+</ion-content>
+
