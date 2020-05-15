@@ -93,7 +93,6 @@ export class MyApp {
 
         this.pages = [
 			{ title: 'FR/EN', component: LanguageSelection, icon: "list" },
-            { title: this.pageElements.help, component: LanguageSelection, icon: "information-circle" },
             { title: this.pageElements.logout, component: SignOut, icon: "log-out" }
         ];
 		console.log(this.pages[0]);

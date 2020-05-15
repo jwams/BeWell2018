@@ -19,30 +19,30 @@
     <ion-spinner></ion-spinner>
 </div>
 
-<ion-content *ngIf="pageElementsLoaded" style="margin-top:56px;" class="noBackground">
+<ion-content *ngIf="pageElementsLoaded" style="margin-top:56px;" class="noBackground" overflow-scroll="true">
 	<ion-grid>
 		<ion-row *ngFor="let wellness of userRecords; index as i" [attr.data-index]="i" (click)="showHideElement(i)" [ngClass]="{blueBackground: showHideArray[i], noBackground: !showHideArray[i]}" class="lightBorder">
 			
 			<!-- Coloured Circle, depending on log score -->
-			<ion-col col-2>
-				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 23">
+			<ion-col col-3>
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 23">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/green.png">
 				</div>
 				
-				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 16 && (wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 22">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 16 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) < 22">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/orange.png">
 				</div>
 				
-				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) > 8 && (wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 15">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 8 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) <= 15">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/yellow.png">
 				</div>
 				
-				<div *ngIf="(wellness.moodScore + wellness.sleepScore + wellness.dietScore) < 8">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) < 8">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/red.png">
 				</div>
 			</ion-col>
 			
-			<ion-col col-8>
+			<ion-col col-6>
 			
 				<!-- Date header -->
 				<ion-row style="padding-top: 8px" [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i]}">
@@ -51,7 +51,7 @@
 			</ion-col>
 			
 			<!-- Side view -->
-			<ion-col col-2 style="padding-top: 15px">
+			<ion-col col-3 style="padding-top: 15px">
 				
 				<!-- Time on the right -->
 				<ion-row>

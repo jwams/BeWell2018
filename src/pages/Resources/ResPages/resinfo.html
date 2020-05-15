@@ -118,22 +118,7 @@
 				<ion-col>
 					<span attr.aria-label="{{pageElements.secondListFooterParagraphAriaLabel}}">{{pageElements.secondListFooterParagraph}}</span>
 				</ion-col>
-			</ion-row>
-			
-			<ion-row style="margin-top: 15px;" *ngIf="!pageElements.hideContactButton">
-				<ion-col text-center>
-					<a href="mailto:{{resEmail}}" class="buttonLink">
-						<button ion-button round outline class="rectBtn iconimg"><img style="width: 40px" src="./assets/Icons/call.svg" /></button>
-					</a>
-				</ion-col>
-			</ion-row>
-			
-			<ion-row *ngIf="!pageElements.hideContactButton">
-				<ion-col text-center>
-					{{pageElements.contactName}}
-				</ion-col>
-			</ion-row>
-			
+			</ion-row>			
 		</ion-grid>
 	</div>		   
 </ion-content>

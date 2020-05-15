@@ -33,6 +33,12 @@ ion-navbar{
     background: $app-toolbar;
 }
 
+.picker-wrapper {
+	background: white !important;
+}
+
+.picker-opts { max-width: 70px !important; }
+
 ion-toolbar{
     background: $app-toolbar;
 }

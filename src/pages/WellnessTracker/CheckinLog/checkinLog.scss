@@ -30,6 +30,10 @@ page-checkinLog {
 	background: linear-gradient(210deg, #33ccff, #FFFFFF); /* Standard syntax (must be last) */
     }
 
+	ion-content > .scroll-content{
+		padding-bottom: 56px;
+	}
+
     .stressBackground {
 	min-width: 60px;
 	colour: #000000;

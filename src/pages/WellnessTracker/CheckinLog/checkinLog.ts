@@ -71,6 +71,16 @@ export class CheckinLog {
             this.userID = value;
         });
     }
+	
+	// String to Int
+	parseNumber(string) {
+		return Number(string);
+	}
+	
+	// Returns the sum of moodScore + sleepScore + dietScore
+	totalScore(moodScore, sleepScore, dietScore) {
+		return this.parseNumber(moodScore) + this.parseNumber(sleepScore) + this.parseNumber(dietScore);
+	}
 
     configuration() {
 
@@ -193,7 +203,7 @@ export class CheckinLog {
     }
 
     getData() {
-        this.openDatabase.executeSql('SELECT * FROM wellness ORDER BY rowid DESC', {} as any).then(res => {
+        this.openDatabase.executeSql('SELECT * FROM wellness ORDER BY date DESC', {} as any).then(res => {
             this.userRecords = [];
             for(var i=0; i<res.rows.length; i++) {
 				this.userRecords.push({rowid:res.rows.item(i).rowid, date:res.rows.item(i).date, moodScore: this.decrypt(res.rows.item(i).moodScore), dietScore: this.decrypt(res.rows.item(i).dietScore), sleepScore: this.decrypt(res.rows.item(i).sleepScore)})

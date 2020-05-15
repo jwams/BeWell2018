@@ -204,7 +204,7 @@ export class Dashboard {
 
             // Generating the select and where clause based off data above
             selectStatement = moodScore + dietScore + sleepScore + "date";		
-            whereClause = "WHERE date BETWEEN DATETIME('" + fromDate + "') AND DATETIME('" + toDate + "') AND userID = '" + this.userID + "' ORDER BY date DESC";
+            whereClause = "WHERE date BETWEEN DATETIME('" + fromDate + "') AND DATETIME('" + toDate + "') AND userID = '" + this.userID + "' ORDER BY date ASC";
 
             // Combine the two statements and wrap them with SQL syntax
             query = "SELECT " + selectStatement + " FROM wellness " + whereClause;
@@ -250,6 +250,9 @@ export class Dashboard {
                     }
                 }
 
+				console.log("Labels Array: ")
+				console.log(labelsArray);
+				
                 // If moodCheckbox was selected, build our mood line
                 if(this.moodCheckbox) {
 

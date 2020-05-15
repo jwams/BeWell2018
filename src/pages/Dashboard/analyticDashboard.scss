@@ -10,7 +10,9 @@ page-analyticDashboard {
 		position: relative;
 		overflow-x: scroll;
 	}
-	
+	.picker-wrapper {
+		background: white !important;
+	}
 	.canvas-wrap {
 		width: 1000px;
 		height: 100%;
@@ -44,6 +46,8 @@ page-analyticDashboard {
 	.titleText {
 		font-size: 16px;
 	}
+	
+	
 	
 	.center > * {
 		display: flex!important;
