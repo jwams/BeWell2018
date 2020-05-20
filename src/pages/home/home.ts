@@ -17,10 +17,13 @@ import { TranslationService } from '../../assets/services/translationService';
 import { WellnessTracker } from '../WellnessTracker/wellnesstracker';
 import { Assessment } from '../Tools/assessment/assessment';
 import { Login } from './Login/login/login';
+import { SignOut } from './Login/signout/signout';
 import { DailyEntry } from '../WellnessTracker/DailyEntry/dailyEntry'; // home.html
 import { CheckinLog } from '../WellnessTracker/CheckinLog/checkinLog'; // home.html
 import { Resources } from '../Resources/resources'; // home.html
 import { SqlTester } from '../SQLTester/SqlTester';
+
+
 
 @Component({
     selector: 'page-home',
@@ -34,6 +37,7 @@ export class HomePage {
     dailyentry = DailyEntry;
     checkinlog = CheckinLog;
 	sqlTester = SqlTester;
+	signout = SignOut;
 
     // The actual content of the page, fetched via translationService.ts
     private pageElements: Object;
@@ -48,6 +52,7 @@ export class HomePage {
     constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private translationService: TranslationService, private sqlite: SQLite) {
 		this.authenticate();
         this.configuration();
+		
     }
 
     authenticate() {		

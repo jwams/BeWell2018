@@ -27,6 +27,8 @@ import { DailyEntry } from '../WellnessTracker/DailyEntry/dailyEntry';
 
 // JS Imports
 import * as moment from 'moment';
+import 'moment/locale/fr';
+
 import * as Chart from 'chart.js';
 
 import * as CryptoJS from 'crypto-js';
@@ -99,6 +101,13 @@ export class Dashboard {
         // Fetch the content from our language translation service
         this.storage.get("languageFlag").then((value) => {
             if(value != null) {
+				
+				if(value == "en") {
+					moment.locale("en");
+				} else if(value == "fr") {
+					moment.locale("fr");
+				}
+				
                 this.pageElements = this.translationService.load("analyticDashboard.html", value);
                 this.pageElementsLoaded = true;
                 
@@ -186,16 +195,17 @@ export class Dashboard {
             // ----------- Building/Formatting Dates ----------- //
 
             // Formatting dates
-            fromDate = moment(fromDate).format('YYYY-MM-DD HH:mm:ss');
-            toDate = moment(toDate).format('YYYY-MM-DD HH:mm:ss');
+            fromDate = moment(fromDate).set({'hour': 0, 'minute': 0}).format('YYYY-MM-DD HH:mm:ss');
+            toDate = moment(toDate).set({'hour': 23, 'minute': 59}).add(1, 'days').format('YYYY-MM-DD HH:mm:ss');
 
+			
             // Set the times to their min or max hour accordingly
-            var finalFromDate = new String(fromDate.slice(0, 10) + ' 00' + fromDate.slice(13, fromDate.length));
-            var finalToDate = new String(toDate.slice(0, 10) + ' 23' + toDate.slice(13, toDate.length));
+           // var finalFromDate = new String(fromDate.slice(0, 10) + ' 00' + fromDate.slice(13, fromDate.length));
+            //var finalToDate = new String(toDate.slice(0, 10) + ' 23' + toDate.slice(13, toDate.length));
 
             // Turn them into a string object so we can use them in our queries
-            fromDate = finalFromDate.toString();
-            toDate = finalToDate.toString();
+            //fromDate = finalFromDate.toString();
+            //toDate = finalToDate.toString();
 			
 			console.log("fromDate: " + fromDate);
 			console.log("toDate: " + toDate);
@@ -204,7 +214,7 @@ export class Dashboard {
 
             // Generating the select and where clause based off data above
             selectStatement = moodScore + dietScore + sleepScore + "date";		
-            whereClause = "WHERE date BETWEEN DATETIME('" + fromDate + "') AND DATETIME('" + toDate + "') AND userID = '" + this.userID + "' ORDER BY date ASC";
+            whereClause = "WHERE date BETWEEN DATE('" + fromDate + "') AND DATE('" + toDate + "') ORDER BY date ASC";
 
             // Combine the two statements and wrap them with SQL syntax
             query = "SELECT " + selectStatement + " FROM wellness " + whereClause;

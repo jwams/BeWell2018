@@ -29,7 +29,7 @@
 					<img height="50px" width="50px" src="./assets/imgs/Badges/green.png">
 				</div>
 				
-				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 16 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) < 22">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 16 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) <= 22">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/orange.png">
 				</div>
 				
@@ -37,7 +37,7 @@
 					<img height="50px" width="50px" src="./assets/imgs/Badges/yellow.png">
 				</div>
 				
-				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) < 8">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) <= 8">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/red.png">
 				</div>
 			</ion-col>
@@ -46,7 +46,9 @@
 			
 				<!-- Date header -->
 				<ion-row style="padding-top: 8px" [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i]}">
-					{{wellness.date | date: "MMMM d, yyyy"}}
+					<!--{{wellness.date | date: "MMMM d, yyyy"}}-->
+					<!-- {{wellness.date}} -->
+					{{formatDate(wellness.date)}}
 				</ion-row>
 			</ion-col>
 			

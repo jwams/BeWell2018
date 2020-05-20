@@ -46,20 +46,20 @@
         
         <form (ngSubmit)="saveData()">
         
-            <ion-row>
-                <ion-item no-lines>
-                    <ion-range min="1" max="10" [(ngModel)]="data.moodScore" name="moodScore" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
-                        <ion-label range-left attr.aria-label="{{pageElements.moodText}}" class="titleText">{{pageElements.moodText}}</ion-label>
-                    </ion-range>
-                </ion-item>      
+            <ion-row>			
+				<ion-item no-lines>
+					<ion-range min="1" max="10" [(ngModel)]="data.moodScore" name="moodScore" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
+						<div range-left attr.aria-label="{{pageElements.moodText}}" class="titleText" slot="start">{{pageElements.moodText}}</div>
+					</ion-range>
+				</ion-item>     
             </ion-row>
             
             <ion-row>
-                <ion-item no-lines>
-                    <ion-range min="1" max="10" [(ngModel)]="data.dietScore" name="dietScore" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
-                        <ion-label range-left attr.aria-label="{{pageElements.dietText}}" class="titleText">{{pageElements.dietText}}</ion-label>
-                    </ion-range>
-                </ion-item>
+				<ion-item no-lines>
+					<ion-range min="1" max="10" [(ngModel)]="data.dietScore" name="dietScore" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
+						<div range-left attr.aria-label="{{pageElements.dietText}}" class="titleText" slot="start">{{pageElements.dietText}}</div>
+					</ion-range>
+				</ion-item>
             </ion-row>
             
             <ion-row style="margin-bottom: 20px;">                
@@ -77,8 +77,22 @@
             </ion-item>    -->   
 
             <ion-row>
-                <ion-col text-center>
-                    <button ion-button round outline type="submit" class="rectBtn iconimg" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog"><img style="width: 30px;" src="./assets/Icons/checkmark.svg" /></button>
+               <!-- <ion-col *ngIf="greaterThan(moodScore, 0) && greaterThan(sleepScore, 0) && greaterThan(dietScore, 0)" text-center>
+                    <button ion-button round outline type="submit" class="rectBtnGreen iconimg" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog">
+						<img style="width: 30px" src="./assets/Icons/checkmarkGreen.png" />
+					</button>
+                </ion-col>
+				
+				<ion-col *ngIf="greaterThan(totalScore, 3)" text-center>
+                    <button ion-button round outline type="submit" class="rectBtnRed iconimg" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog">
+						<img style="width: 30px" src="./assets/Icons/checkmarkRed.png" />
+					</button>
+                </ion-col>
+				-->
+				<ion-col text-center>
+                    <button ion-button round outline type="submit" class="rectBtn iconimg" [disabled]="submitFlag" block attr.aria-label="{{pageElements.saveDataText}}" [navPush]="checkinlog">
+						<img style="width: 30px" src="./assets/Icons/checkmark.svg" />
+					</button>
                 </ion-col>
             </ion-row>
 

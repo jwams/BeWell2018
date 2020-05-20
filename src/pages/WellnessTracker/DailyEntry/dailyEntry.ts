@@ -48,19 +48,21 @@ export class DailyEntry {
 	
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
+	private submitFlag: boolean = true;
+	
+	// ------------------------- Page Specific Variables ------------------------- //
+	
 	data = { 
 		dateTime: moment().format(), 
 		date: moment().format(), 
-		moodScore: 5, 
-		dietScore: 5, 
-		sleepScore: 5, 
-		stressScore: 5, 
+		moodScore: 0, 
+		dietScore: 0, 
+		sleepScore: 0, 
 		entryNote: ""
 	};
 	
-	private totalScore: number = 7;
+	private totalScore: number = 0;
 
-    // ------------------------- Page Specific Variables ------------------------- //
     constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private toast: Toast, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
         this.authenticate();
         this.configuration();
@@ -68,10 +70,13 @@ export class DailyEntry {
 
     configuration() {
 
-        console.log("Date: " + this.data.date);
-
         var languageFlag = this.storage.get("languageFlag").then((value) => {
             if(value != null) {
+				if(value == "en") {
+					moment().locale('en');
+				} else if(value == "fr") {
+					moment().locale('fr');
+				}
                 this.pageElements = this.translationService.load("dailyEntry.html", value);
                 this.pageElementsLoaded = true;
                 console.log("this.data.date: " + this.data.date);
@@ -83,6 +88,10 @@ export class DailyEntry {
             }
         });
     }
+	
+	greaterThan(x, y) {
+		return x > y;
+	}
 	
 	decrypt(value) {
 		console.log("Decrypting: " + value);
@@ -105,8 +114,19 @@ export class DailyEntry {
 
     updateScores(selectedValue: any) {
         this.totalScore = Math.floor((this.data.moodScore + this.data.sleepScore + this.data.dietScore)/3);
+		this.canSubmit();
     }
     
+	canSubmit() {
+		console.log("Can submit HIT");
+		if(this.greaterThan(this.data.moodScore, 0) && this.greaterThan(this.data.sleepScore, 0) && this.greaterThan(this.data.dietScore, 0)) {
+			this.submitFlag = false;
+		} else {
+			this.submitFlag = true;
+		}
+		
+		
+	}
 
     initDB() {
         console.log("TJDE:", this.userID +".db" );

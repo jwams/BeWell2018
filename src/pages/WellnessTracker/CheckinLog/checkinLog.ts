@@ -15,6 +15,9 @@ import { TranslationService } from './../../../assets/services/translationServic
 
 import * as CryptoJS from 'crypto-js';
 
+import * as moment from 'moment';
+import 'moment/locale/fr';
+
 // ------------------------- Page Specific Imports ------------------------- //
 
 // Page Imports
@@ -57,8 +60,13 @@ export class CheckinLog {
 	
     // Runs instead of the constructor because we need to handle when this page is popped to (When a page is popped to, the constructor won't run)
     ionViewWillEnter() {
-        this.authenticate();
+		
+		//moment.locale("fr");
+		//console.log(moment().localeData());
+		//console.log(moment("2020-05-15T13:18:28-07:00").format("LLL"));
+		this.authenticate();
         this.configuration();
+		
     }
 
     authenticate() {
@@ -72,6 +80,11 @@ export class CheckinLog {
         });
     }
 	
+	formatDate(date) {
+		console.log("date: " + date);
+		return moment(date).format("MMMM DD, YYYY");
+	}
+	
 	// String to Int
 	parseNumber(string) {
 		return Number(string);
@@ -83,79 +96,17 @@ export class CheckinLog {
 	}
 
     configuration() {
-
-		// Temporary code, just to get around not having SQL
-		/*
-		this.pageElements = this.translationService.load("checkinLog.html", "en");
-		this.pageElementsLoaded = true;
-	
-		var entry1 = {
-			rowid: 1,
-			moodScore: 8,
-			dietScore: 6,
-			sleepScore: 7,
-			date: new Date("Fri Mar 31 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-		}
-		
-		var entry2 = {
-			rowid: 2,
-			moodScore: 10,
-			dietScore: 5,
-			sleepScore: 9,
-			date: new Date("Fri Apr 1 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ip"
-		}
-	
-		var entry3 = {
-			rowid: 3,
-			moodScore: 1,
-			dietScore: 3,
-			sleepScore: 6,
-			date: new Date("Fri Apr 2 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-		}
-		
-		var entry4 = {
-			rowid: 4,
-			moodScore: 8,
-			dietScore: 6,
-			sleepScore: 7,
-			date: new Date("Fri Apr 3 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-		}
-		
-		var entry5 = {
-			rowid: 5,
-			moodScore: 10,
-			dietScore: 10,
-			sleepScore: 10,
-			date: new Date("Fri Apr 3 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-		}
-		
-		var entry6 = {
-			rowid: 6,
-			moodScore: 1,
-			dietScore: 1,
-			sleepScore: 1,
-			date: new Date("Fri Apr 3 15:48:21 2018 GMT").toISOString(),
-			entryNote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-		}
-
-		this.userRecords.push(entry1);
-		this.userRecords.push(entry2);
-		this.userRecords.push(entry3);
-		this.userRecords.push(entry4);
-		this.userRecords.push(entry5);
-		this.userRecords.push(entry6);
-
-		console.log(this.userRecords);
-		*/
 		
 	    // Fetch the content from our language translation service
         var languageFlag = this.storage.get("languageFlag").then((value) => {
             if(value != null) {
+				
+				if(value == "en") {
+					moment.locale("en");
+				} else if(value == "fr") {
+					moment.locale("fr");
+				}
+				
                 this.initDB();
 				this.pageElements = this.translationService.load("checkinLog.html", value);
                 this.pageElementsLoaded = true;

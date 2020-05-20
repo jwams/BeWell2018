@@ -93,7 +93,7 @@ export class TranslationService {
 						pageToolText1: "Try Our Tools!",
 						buttonText1: "Daily Check-In",
 						buttonText2: "Wellness Tracker",
-						buttonText3: "Tools (Coming soon!)",
+						buttonText3: "Log out",
 						buttonText4: "Resources"
 					}
 				}
@@ -144,7 +144,7 @@ export class TranslationService {
 					return {
 						resourceTitleText: "Resources",
 						resPageText: "Choose the resource list that applies to you",
-						buttonText1: "Employee Assistance Services",
+						buttonText1: "Are you in a crisis?",
 						buttonText1AriaLabel: "Employee Assistance Services button",
 						buttonText2: "Need counselling?",
 						buttonText2AriaLabel: "Need counselling button",
@@ -822,7 +822,7 @@ export class TranslationService {
 				
 				case "wellnesstracker.html": { //all trasnlated but Welness tracker
 					return {
-						resourceTitleText: "Journal de bord sur le bien-être",
+						wellnessTrackerTitleText: "Journal de bord sur le bien-être",
 						resPageText: "Choisissez la liste de ressources qui vous convient",
 						buttonText1: "Registre quotidien", //"Journal quotidien",
 						buttonText2: "Graphique",
@@ -835,7 +835,7 @@ export class TranslationService {
 						pageToolText1: "Essayez nos outils!", //"Mettez à l'essai nos outils!"
 						buttonText1: "Vérification quotidienne", //"Vérification quotideienne"
 						buttonText2: "Journal de bord sur le bien-être",
-						buttonText3: "Outils (À venir!)", //"Outils (Arrive bientôt!)"
+						buttonText3: "Se déconnecter", //"Outils (Arrive bientôt!)"
 						buttonText4: "Ressources"
 					}
 				}
@@ -887,7 +887,7 @@ export class TranslationService {
 					return {
 						resourceTitleText: "Ressources", // "Resources",
 						resPageText: "Choissisez la liste de ressource qui s'applique à vous", //"Choose the resource list that applies to you"
-						buttonText1: "Programme d'aide aux employés", // "Employee Assistance Services",
+						buttonText1: "Êtes-vous en crise?", // "Employee Assistance Services",
 						buttonText1AriaLabel: "Services d'assistance pour employé button", // "Employee Assistance Services button"
 						buttonText2: "Besoin de conseil?", //"Besoin de counseling?"
 						buttonText2AriaLabel: "Besoin de conseil button", //"Besoin de counseling button"
@@ -897,7 +897,7 @@ export class TranslationService {
 						buttonText4AriaLabel: "Avez-vousvécu un événement traumatisant button", //"Vous avez vécu un événement traumatisant button"
 						buttonText5: "Faisez-vous face à des conflits?", //
 						buttonText5AriaLabel: "Faisez-vous face à des conflits button", //
-						buttonText6: "Menaces", //
+						buttonText6: "Êtes-vous menacé", //
 						buttonText6AriaLabel: "Menaces button", //
 						buttonText7: "Êtes-vous de retour au travail?", //
 						buttonText7AriaLabel: "Êtes-vous de retour au travail button", //

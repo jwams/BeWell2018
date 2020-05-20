@@ -34,7 +34,7 @@ import { EmpRev2 } from '../pages/Resources/Employee/Rev2/empRev2';
 import { EmpRev3 } from '../pages/Resources/Employee/Rev3/empRev3';
 import { SqlTester } from '../pages/SQLTester/SqlTester';
 import { Assessment } from '../pages/Tools/assessment/assessment';
-import { SelfAssessment } from '../pages/Tools/assessment/selfassessment/selfAssessment';
+import { SelfAssessment } from '../pages/Tools/assessment/selfassessment/selfAssessment'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -44,7 +44,6 @@ import { Toast } from '@ionic-native/toast';
 
 import { TranslationService } from '../assets/services/translationService';
 //import { DatabaseService } from '../assets/services/databaseService';
-
 
 @NgModule({
     declarations: [
