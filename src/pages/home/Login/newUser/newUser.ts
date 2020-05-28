@@ -1,4 +1,6 @@
-// Base Imports
+// ------------------------- Major imports for all pages ------------------------- //
+
+// Component Imports
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -27,7 +29,6 @@ export class NewUser {
     
     // Our persistent connection to our DB which is set in initDB();
     private openDatabase: SQLiteObject;
-    private openWTDatabase: SQLiteObject;
 
     // Our references to our view
     private firstName: String;
@@ -42,36 +43,24 @@ export class NewUser {
     private invalidSecurityQuestion: boolean;
     private invalidSecurityAnswer: boolean;
 
-    private hashedPassword: any;
-
     // Stores our SQLite3 table data
     private userRecords: any = [];
-
+	
     // The actual content of the page, fetched via translationService.ts
-    private pageElements: Object;
+    private pageElements: any;
 
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
+	
+	private languageFlag: string = "en";
     
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
 	private userID: String;
 	
     constructor(public navCtrl: NavController, private sqlite: SQLite, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
-
-        // Fetch the content from our language translation service
-        this.storage.get("languageFlag").then((value) => {
-            if(value != null) {
-                this.pageElements = this.translationService.load("newUser.html", value);
-                this.pageElementsLoaded = true; 
-                console.log("this.pageElementsNewUser: ");
-                console.log(this.pageElements);
-            } else {
-                // Handle null language flag
-            }
-        });
-
-        // Initialize our view variables
+        
+		// Initialize our view variables
         this.firstName = "";
         this.pin = "";
         this.securityQuestion = "";
@@ -84,19 +73,45 @@ export class NewUser {
         this.invalidSecurityAnswer = false;
 
         // Initialize our DB
-		console.log("HIT1");
         this.initDB();
     }
+	
+	configuration() {
+		
+        // Fetch the current language flag set in storage, once complete, call the translation service to load the correct page content in the chosen language 
+		this.storage.get("languageFlag").then((value) => {
+            if(value != null) {
+				
+				// Load the page's content
+                this.pageElements = this.translationService.load("newUser.html", value);
+				
+				// Once the content has been loaded, set our page loaded flag to true
+				this.pageElementsLoaded = true;
+				
+				this.languageFlag = value;
+            } 
+            else {
+                console.log("No language flag set");
+            }			
+		});
+    }
+	
+	// Method is ran whenever the app's view is changed to this page's view
+	ionViewWillEnter() {
+		this.configuration();	
+    }
 
+	// Returns the decrypted version of value: any
 	decrypt(value) {
 		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
 	}
-	
+
+	// Returns the encrypted string version of value: any
 	encrypt(value) {
-		console.log("Encrypting: " + value + " into: " +  CryptoJS.AES.encrypt(value.toString(), this.key).toString());
 		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
 	}
 
+	// Called when the user clicks "Create User", carries out input validation and then finally the DB entry
     createUser() {
 
         // Tracks whether an alert as been shown yet, if one has, and there are other incorrect fields, it won't spam the user with every alert at once
@@ -113,7 +128,7 @@ export class NewUser {
         if(this.firstName == "" && !alertShown) {
             alertShown = true;
             this.invalidName = true;
-            this.showAlert("Invalid First Name", "The first name field is blank!", "No Problem!");
+            this.showAlert(this.pageElements.invalidLogin, this.pageElements.invalidNameText, this.pageElements.alrightText);
             
         }
 
@@ -123,7 +138,7 @@ export class NewUser {
                 if(this.firstName == this.userRecords[i].firstName) {
                     alertShown = true;
                     this.firstNameFound = true;
-                    this.showAlert("Invalid First Name", "That name has already been taken!", "Alright!");
+                    this.showAlert(this.pageElements.invalidNameText, this.pageElements.firstNameFoundText, this.pageElements.alrightText);
                 }
             }
         }
@@ -132,21 +147,21 @@ export class NewUser {
         if((this.pin.length < 4 || this.pin.length > 50) && !alertShown) {
             alertShown = true;
             this.invalidPin = true;
-            this.showAlert("Invalid Pin", "Your pin must be between 4 and 50 characters!", "Sounds good!");
+            this.showAlert(this.pageElements.invalidPinText, this.pageElements.invalidPinLengthText, this.pageElements.soundsGoodText);
         }                
 
         // Check to see if the security question is blank, if so, set the flag
         if(this.securityQuestion == "" && !alertShown) {
             alertShown = true;
             this.invalidSecurityQuestion = true;
-            this.showAlert("Invalid Security Question", "Your security question can't be blank!", "Cool!");
+            this.showAlert(this.pageElements.invalidSecurityQuestion, this.pageElements.invalidSecurityQuestionText, this.pageElements.soundsGoodText);
         }
 
         // Check to see if the security answer is blank, if so, set the flag
         if(this.securityAnswer == "" && !alertShown) {
             alertShown = true;
             this.invalidSecurityAnswer = true;
-            this.showAlert("Invalid Security Answer", "Your answer cannot be blank!", "For Sure!");
+            this.showAlert(this.pageElements.invalidSecurityAnswer, this.pageElements.invalidSecurityAnswerText, this.pageElements.alrightText);
         }
 
         // If all flags are false, execute the insert query
@@ -156,12 +171,7 @@ export class NewUser {
 			var encryptedPin = this.encrypt(this.pin);
 			var encryptedSecurityQuestion = this.encrypt(this.securityQuestion);
 			var encryptedSecurityAnswer = this.encrypt(this.securityAnswer);
-			
-			console.log("encryptedFirstName: " + encryptedFirstName);
-			console.log("encryptedPin: " + encryptedPin);
-			console.log("encryptedSecurityQuestion: " + encryptedSecurityQuestion);
-			console.log("encryptedSecurityAnswer: " + encryptedSecurityAnswer);
-			
+
             this.openDatabase.executeSql('INSERT INTO users(firstName, pin, securityQuestion, securityAnswer) VALUES (?,?,?,?)', [encryptedFirstName, encryptedPin, encryptedSecurityQuestion, encryptedSecurityAnswer])
                 .then(res => {
                     console.log("User added successfully");
@@ -170,9 +180,6 @@ export class NewUser {
                     this.navCtrl.pop();
             }).catch(e => console.log(e));
         }
-
-        // Build Wellness Tracker Table
-        this.createWTtable();
     }
 
     // Initializes our DB, and fetchs all user records storing them in userRecords[]
@@ -190,13 +197,7 @@ export class NewUser {
 
             db.executeSql('SELECT * FROM users ORDER BY rowid DESC', {} as any).then(res => {
                 this.userRecords = [];
-				
-				/*console.log("newUser.html:");
-				console.log("RowID: " + res.rows.item(i).rowid);
-				console.log("firstName: " + res.rows.item(i).firstName);
-				console.log("pin: " + res.rows.item(i).pin);
-				console.log("securityQuestion: " + res.rows.item(i).securityQuestion);
-				console.log("securityAnswer: " + res.rows.item(i).securityAnswer);*/
+
                 for(var i=0; i<res.rows.length; i++) {
                     this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:this.decrypt(res.rows.item(i).firstName), pin:this.decrypt(res.rows.item(i).pin), securityQuestion:this.decrypt(res.rows.item(i).securityQuestion), securityAnswer:this.decrypt(res.rows.item(i).securityAnswer)})
                 }                             
@@ -205,26 +206,9 @@ export class NewUser {
             }).catch(e => console.log(e));
         }).catch(e => console.log(e));
     }
-
-    createWTtable(){
-        console.log("userid:", this.userID)
-
-        this.sqlite.create({
-            name: this.userID + ".db",
-            location: 'default'
-        }).then((db: SQLiteObject) => {
-
-            this.openWTDatabase = db;
-                db.executeSql('CREATE TABLE IF NOT EXISTS wellness(rowid INTEGER PRIMARY KEY, userID TEXT, date TEXT, moodScore TEXT, dietScore TEXT, sleepScore TEXT)', {} as any)
-                .then(res => console.log('Executed SQL'))
-                .catch(e => console.log(e));
-                console.log("wellness created.")
-            }).catch(e => console.log(e));
-    }
         
     // Shows alert based on the title, subtitle, and button text supplied
     showAlert(titleText, subtitleText, buttonText) {
-        console.log(this.navCtrl);
         let alert = this.alertCtrl.create({
             title: titleText,
             subTitle: subtitleText,

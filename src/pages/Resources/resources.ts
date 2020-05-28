@@ -2,6 +2,7 @@
 // Component Imports
 import { Component} from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 
 // Local Storage Import
@@ -46,17 +47,14 @@ export class Resources {
 	
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;   
-
+	private languageFlag: string = "en";
     private userID: string;
     
-    constructor(public navCtrl: NavController, 
-        public navParams: NavParams, 
-        private storage: Storage, 
-        private translationService: TranslationService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage, private translationService: TranslationService, public toastCtrl: ToastController) { }
 	
+	ionViewWillEnter() {
 		this.authenticate();
-		this.configuration();
-    
+        this.configuration();	
     }
     
     authenticate() {		
@@ -76,12 +74,48 @@ export class Resources {
             if(value != null) {
                 this.pageElements = this.translationService.load("resources.html", value);
 				this.pageElementsLoaded = true;
+				this.languageFlag = value;
 				console.log(this.pageElements);
             } 
             else {
                 console.log("No language flag set");
             }			
 		});
+    }
+	
+	presentToast() {
+		
+		let message = "";
+		
+		if(this.languageFlag == "en") {
+			message = "Language changed to English";
+		} else if(this.languageFlag == "fr") {
+			message = "Langue changée au français";
+		}
+		
+		const toast = this.toastCtrl.create({
+			message: message,
+			duration: 2000,
+			cssClass: "toastClass",
+			dismissOnPageChange: true
+		});
+		
+		toast.present();
+	}
+	
+	changeLanguage() {
+		
+		if(this.languageFlag == "en") {
+			this.languageFlag = "fr";
+		} else if(this.languageFlag == "fr") {
+			this.languageFlag = "en";
+		}
+		
+        this.storage.set("languageFlag", this.languageFlag).then((value) => {
+            //this.events.publish('languageFlag:changed', this.languageFlag);
+            this.pageElements = this.translationService.load("resources.html", this.languageFlag);
+			this.presentToast();
+        });	
     }
     
     //POP a page off the menu stack

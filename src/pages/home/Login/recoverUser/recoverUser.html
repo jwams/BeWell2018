@@ -1,16 +1,27 @@
+<!-- Header -->
 <ion-header>
 	<ion-navbar>
+	
+		<!-- Menu Button (Top Left) -->
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
+		
+		<!-- Header Banner Title -->
 		<ion-title attr.aria-label="{{pageElements.recoverUserText}}" *ngIf="pageElementsLoaded">
 			{{pageElements.recoverUserText}}
 		</ion-title>
 	</ion-navbar>
 </ion-header>
 
+<!-- Loading Spinner --> 
+<div *ngIf="!pageElementsLoaded">
+    <ion-spinner></ion-spinner>
+</div>
+
 <ion-content padding>
     <ion-grid *ngIf="pageElementsLoaded">
+	
         <!-- Phase 1 -->
         <div *ngIf="phase1">
 
@@ -26,6 +37,7 @@
                 </ion-col>
             </ion-row>
             <ion-row>
+			
                 <!-- Find name button -->
                 <ion-col>
                     <button ion-button (click)="submitPhase1()" attr.aria-label="{{pageElements.findNameText}}">{{pageElements.findNameText}}</button>
@@ -44,7 +56,7 @@
             
             <!-- Security question, security answer label, and input field -->
             <ion-row>
-                <ion-col>
+                <ion-col attr.aria-label="{{securityQuestion}}">
                     {{securityQuestion}}
                 </ion-col>
             </ion-row>

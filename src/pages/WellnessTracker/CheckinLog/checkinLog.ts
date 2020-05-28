@@ -46,6 +46,7 @@ export class CheckinLog {
 
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
+	private languageFlag: string = "en";
 	
 	private date: String = new Date("Fri Apr 3 15:48:21 2018 GMT").toISOString();
 	
@@ -60,13 +61,8 @@ export class CheckinLog {
 	
     // Runs instead of the constructor because we need to handle when this page is popped to (When a page is popped to, the constructor won't run)
     ionViewWillEnter() {
-		
-		//moment.locale("fr");
-		//console.log(moment().localeData());
-		//console.log(moment("2020-05-15T13:18:28-07:00").format("LLL"));
 		this.authenticate();
-        this.configuration();
-		
+        this.configuration();	
     }
 
     authenticate() {
@@ -103,13 +99,16 @@ export class CheckinLog {
 				
 				if(value == "en") {
 					moment.locale("en");
+					this.languageFlag = "en";
 				} else if(value == "fr") {
 					moment.locale("fr");
+					this.languageFlag = "fr";
 				}
 				
                 this.initDB();
 				this.pageElements = this.translationService.load("checkinLog.html", value);
                 this.pageElementsLoaded = true;
+				console.log(this.pageElements);
             } else {
                 console.log("No language flag set");
             }			
@@ -174,6 +173,20 @@ export class CheckinLog {
     //POP a page off the menu stack
     goBack() {
         this.navCtrl.pop();
+    }
+	
+	changeLanguage() {
+		
+		if(this.languageFlag == "en") {
+			this.languageFlag = "fr";
+		} else if(this.languageFlag == "fr") {
+			this.languageFlag = "en";
+		}
+		
+        this.storage.set("languageFlag", this.languageFlag).then((value) => {
+            //this.events.publish('languageFlag:changed', this.languageFlag);
+            this.pageElements = this.translationService.load("checkinLog.html", this.languageFlag);
+        });	
     }
 }
 

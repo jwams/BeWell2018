@@ -109,4 +109,10 @@ page-checkinLog {
 	.newEntrybutton {
 		font-size: 18px;
 	}
+	
+	.smallerFontSize {
+		.toolbar-title-md {
+			font-size: 16px !important;
+		}
+	}
 }

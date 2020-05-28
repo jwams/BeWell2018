@@ -1,4 +1,5 @@
 // ------------------------- Mandatory imports for all pages ------------------------- //
+
 // Import for localStorage
 import { Storage } from '@ionic/storage';
 
@@ -8,17 +9,18 @@ import { TranslationService } from './../../../../assets/services/translationSer
 // Import for SQLite3
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
-// ------------------------- Page Specific Imports ------------------------- //
-
-// Alert Imports
-import { AlertController } from 'ionic-angular';
-
+// Component Imports
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import * as PH from "password-hash";
 
 import * as CryptoJS from 'crypto-js';
+
+// ------------------------- Page Specific Imports ------------------------- //
+
+// Alert Imports
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-recoverUser',
@@ -30,7 +32,7 @@ export class RecoverUser {
     // ------------------------- Mandatory variables for all pages ------------------------- //
 
     // The actual content of the page, fetched via translationService.ts
-    private pageElements: Object;
+    private pageElements: any;
 
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
@@ -40,6 +42,8 @@ export class RecoverUser {
 
     // Our persistent connection to our DB which is set in initDB()
     private openDatabase: SQLiteObject;
+	
+	private languageFlag: string = "en";
 
     // ------------------------- Page Specific Variables ------------------------- //
 
@@ -47,7 +51,7 @@ export class RecoverUser {
     private firstName: String;
     private securityQuestion: String;
     private securityAnswer: String;
-    private pin: String;
+    private pin: String = "";
     private userFoundID: String;
     private hashedPassword: any;
 
@@ -55,27 +59,37 @@ export class RecoverUser {
     private phase1: boolean;
     private phase2: boolean;
     private phase3: boolean;
+	
     private incorrectInput: boolean;
     private inputNotFound: boolean;
     private invalidPin: boolean;
 	
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
-    constructor(public navCtrl: NavController, private sqlite: SQLite, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
-            this.configuration();
+    constructor(public navCtrl: NavController, private sqlite: SQLite, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {}
+	
+	ionViewWillEnter() {
+        this.configuration();
     }
 	
     configuration() {
 
-        // Fetch the content from our language translation service
-        this.storage.get("languageFlag").then((value) => {
+        // Fetch the current language flag set in storage, once complete, call the translation service to load the correct page content in the chosen language 
+		this.storage.get("languageFlag").then((value) => {
             if(value != null) {
+				
+				// Load the page's content
                 this.pageElements = this.translationService.load("recoverUser.html", value);
-                this.pageElementsLoaded = true;
-            } else {
-                // Handle null language flag
-            }
-        });
+				
+				// Once the content has been loaded, set our page loaded flag to true
+				this.pageElementsLoaded = true;
+				
+				this.languageFlag = value;
+            } 
+            else {
+                console.log("No language flag set");
+            }			
+		});
 
         // Set our initial flags
         this.phase1 = true;
@@ -91,10 +105,12 @@ export class RecoverUser {
         this.initDB();
     }
 	
+	// Returns the decrypted version of value: any
 	decrypt(value) {
 		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
 	}
 	
+	// Returns the encrypted string version of value: any
 	encrypt(value) {
 		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
 	}
@@ -105,19 +121,21 @@ export class RecoverUser {
         var nameFound = false;
 
         for(var i = 0; i < this.userRecords.length; i++) {
+			
+			// If we found a name
             if(this.firstName == this.userRecords[i].firstName) {
                 this.phase1 = false;
                 this.phase2 = true;
+				
                 nameFound = true;
-                console.log("Name Found");
+				
                 this.userFoundID = this.userRecords[i].rowid;
                 this.securityQuestion = this.userRecords[i].securityQuestion;
             }
         }
 
         if(!nameFound) {
-            this.showAlert("Name not found!", "We couldn't find that name!", "Try again");
-            console.log("Name not found");
+            this.showAlert(this.pageElements.nameNotFoundText, this.pageElements.cantFindNameText, this.pageElements.tryAgainText);
         }
     }
 
@@ -130,25 +148,20 @@ export class RecoverUser {
                 this.phase2 = false;
                 this.phase3 = true;
                 answerFound = true;
-                console.log("Answer is correct");
             }
         }
 
         if(!answerFound) {
-            this.showAlert("Incorrect Answer", "That isn't the right answer!", "Try again");
-            console.log("Answer is not correct");
+            this.showAlert(this.pageElements.incorrectAnswerText, this.pageElements.wrongAnswerText, this.pageElements.tryAgainText);
         }
     }
 
     // Phase 3: User got the security question right, allow them to enter a new pin, once entered, update the user in the DB
     submitPhase3() {
         if(this.pin.length < 4 || this.pin.length > 50) {
-            this.showAlert("Invalid Pin", "You pin needs to be between 4 and 50 characters!", "Right on");
-            console.log("That pin is invalid");
+            this.showAlert(this.pageElements.invalidPinText, this.pageElements.invalidPinLengthText, this.pageElements.alrightText);
         } else {
             this.openDatabase.executeSql('UPDATE users SET pin = ? WHERE rowid= ?', [this.encrypt(this.pin), this.userFoundID]).then(res => {
-                console.log(this.userFoundID);
-                console.log("User pin successfully updated");
                 this.navCtrl.pop();
             }).catch(e => console.log(e));
         }

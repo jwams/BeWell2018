@@ -5,12 +5,7 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title attr.aria-label="{{pageElements.checkinLogText}}" *ngIf="pageElementsLoaded">{{pageElements.checkinLogText}}</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="addData()" class="newEntrybutton">
-                <ion-icon name="add-circle"></ion-icon>
-            </button>
-        </ion-buttons>
+        <ion-title attr.aria-label="{{pageElements.checkinLogText}}" *ngIf="pageElementsLoaded" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">{{pageElements.checkinLogText}}</ion-title>
     </ion-navbar>
 </ion-header>
 

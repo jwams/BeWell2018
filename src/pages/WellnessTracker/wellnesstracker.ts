@@ -2,6 +2,8 @@
 // Component Imports
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+
 
 // Local Storage Import
 import { Storage } from '@ionic/storage';
@@ -37,18 +39,17 @@ export class WellnessTracker {
     private pageElements: Object;
 	
     // Controls whether our view is loaded based off of if pageElements has been loaded
-    private pageElementsLoaded: boolean = false;   
+    private pageElementsLoaded: boolean = false;  
+	
+	private languageFlag: string = "en";
 
     private userID: string;
     
-    constructor(public navCtrl: NavController, 
-        public navParams: NavParams, 
-        private storage: Storage, 
-        private translationService: TranslationService) 
-        {
-            
-	this.authenticate();
-        this.configuration();
+    constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, private storage: Storage, private translationService: TranslationService) {}
+	
+	ionViewWillEnter() {
+		this.authenticate();
+        this.configuration();	
     }
     
     authenticate() {		
@@ -67,14 +68,35 @@ export class WellnessTracker {
 		var languageFlag = this.storage.get("languageFlag").then((value) => {
 				if(value != null) {
 					this.pageElements = this.translationService.load("wellnesstracker.html", value);
-			this.pageElementsLoaded = true;
-			console.log(this.pageElements);
+					this.pageElementsLoaded = true;
+					this.languageFlag = value;
+					console.log(this.pageElements);
 				} 
 				else {
 					console.log("No language flag set");
 				}			
 		});
     }
+	
+	presentToast() {
+		
+		let message = "";
+		
+		if(this.languageFlag == "en") {
+			message = "Language changed to English";
+		} else if(this.languageFlag == "fr") {
+			message = "Langue changée au français";
+		}
+		
+		const toast = this.toastCtrl.create({
+			message: message,
+			duration: 2000,
+			cssClass: "toastClass",
+			dismissOnPageChange: true
+		});
+		
+		toast.present();
+	}
 	
 	addData() {
         this.navCtrl.push(DailyEntry);
@@ -83,6 +105,21 @@ export class WellnessTracker {
 	//POP a page off the menu stack               
     goBack() {
         this.navCtrl.pop();
-    } 
+    }
+	
+	changeLanguage() {
+		
+		if(this.languageFlag == "en") {
+			this.languageFlag = "fr";
+		} else if(this.languageFlag == "fr") {
+			this.languageFlag = "en";
+		}
+		
+        this.storage.set("languageFlag", this.languageFlag).then((value) => {
+            //this.events.publish('languageFlag:changed', this.languageFlag);
+            this.pageElements = this.translationService.load("wellnesstracker.html", this.languageFlag);
+			this.presentToast();
+        });	
+    }
         
 }

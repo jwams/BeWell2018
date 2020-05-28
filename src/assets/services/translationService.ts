@@ -34,30 +34,40 @@ export class TranslationService {
 				
 				case "login.html": {
 					return {
-						firstNameText: "First Name",
+						loginIDText: "Login ID",
 						pinText: "Pin",
 						createUserText: "Create User",
 						loginText: "Login",
 						forgotPinText: "Forgot Pin",
-						firstNameInput: "First Name Input",
-						pinInput: "Pin Input"
+						firstNameInput: "Login ID Input",
+						pinInput: "Pin Input",
+						invalidLogin: "Invalid login ID or pin!",
+						invalidLoginDesc: "The login ID or pin you have entered wasn't found",
+						tryAgain: "Try Again!",
+						changeLanguageText: "FR/EN"
 					}
 				}
 						
 				case "newUser.html": {
 					return {
 						newUserText: "New User",
-						firstNameText: "First Name",
+						loginIDText: "Login ID",
 						pinText: "Pin",
 						pinRestrictionText: "4-50 Character Pin",
 						securityQuestionText: "Security Question",
 						securityAnswerText: "Security Answer",
 						createUserText: "Create User!",
-						firstNameFoundText: "That first name is already taken!",
-						invalidNameText: "Your first name cannot be blank",
-						invalidPinLengthText: "Your pin has to be 4-6 characters",
+						firstNameFoundText: "That login ID is already taken!",
+						invalidNameText: "Your login ID cannot be blank",
+						invalidPinLengthText: "Your pin must be between 4 and 50 characters!",
 						invalidSecurityQuestionText: "Your security question cannot be blank!",
-						invalidSecurityAnswerText: "Your security answer cannot be blank!"
+						invalidSecurityAnswerText: "Your security answer cannot be blank!",
+						alrightText: "Alright!",
+						invalidPinText: "Invalid pin",
+						soundsGoodText: "Sounds good!",
+						invalidSecurityQuestion: "Invalid Security Question!",
+						invalidSecurityAnswer: "Invalid Security Answer!",
+						invalidLogin: "Invalid Login ID",
 					}
 				}
 					
@@ -65,17 +75,23 @@ export class TranslationService {
 					return {
 						recoverUserText: "Recover User",
 						cantFindNameText: "We couldn't find that name!",
-						nameOfAccountText: "What is the name of the account you're trying to recover?",
-						firstNameText: "First Name",
+						nameOfAccountText: "What is the login ID of the account you're trying to recover?",
+						firstNameText: "Login ID",
 						findNameText: "Find Name",
-						wrongAnswerText: "That isn't the answer!",
+						wrongAnswerText: "That isn't the right answer!",
 						answerToQuestionText: "What is the answer to the following security question?",
 						securityAnswerText: "Security Answer",
 						submitAnswerText: "Submit Answer",
-						invalidPinText: "Your pin needs to be between 4 and 50 characters!",
 						enterNewPinText: "Please enter your new pin",
 						characterLengthText: "Minimum 4 Character Pin", //**
-						setNewPinText: "Set new pin"
+						setNewPinText: "Set new pin",
+						nameNotFoundText: "Name not found!",
+						tryAgainText: "Try Again!",
+						incorrectAnswerText: "Incorrect Answer!",
+						invalidPinText: "Invalid pin",
+						invalidPinLengthText: "Your pin must be between 4 and 50 characters!",
+						alrightText: "Alright!"
+						
 					}
 				}
 
@@ -776,54 +792,70 @@ export class TranslationService {
 				
 				case "login.html": {
 					return {
-						firstNameText: "Prénom",
+						loginIDText: "Nom d’utilisateur",
 						pinText: "NIP",
-						createUserText: "Créer un compte d’utilisateur",
+						createUserText: "Créer un utilisateur",
 						loginText: "Ouverture de session",
-						forgotPinText: "J’ai oublié mon NIP",
-						firstNameInput: "Entrée du prénom",
-						pinInput: "Entrée le NIP" //"Entrée de broche"
+						forgotPinText: "NIP oublié",
+						firstNameInput: "Entrée de l'ID de connexion",
+						pinInput: "Entrée NIP ",
+						invalidLogin: "Numéro d'utilisateur ou NIP invalide!",
+						invalidLoginDesc: "Le Numéro d'utilisateur ou NIP entrer n'a pas été retrouvé",
+						tryAgain: "Essayez de nouveau",
+						changeLanguageText: "FR/EN"
 					}
 				}
 						
 				case "newUser.html": {
 					return {
-						firstNameText: "Prénom",
+						newUserText: "Nouveau utilisateur",
+						loginIDText: "Numéro d'utilisateur",
 						pinText: "NIP",
-						pinRestrictionText: "NIP de 4 à 50 caractères",
+						pinRestrictionText: "NIP contenant 4 à 50 charactères",
 						securityQuestionText: "Question de sécurité",
 						securityAnswerText: "Réponse à la question de sécurité",
-						createUserText: "Créer un compte d’utilisateur",
-						firstNameFoundText: "Le prénom est déjà utilisé!",
-						invalidNameText: "Le champ Prénom doit être rempli",
-						invalidPinLengthText: "Votre NIP doit avoir de 4 à 50 caractères",
-						invalidSecurityQuestionText: "Le champ Question de sécurité doit être rempli",
-						invalidSecurityAnswerText: "Le champ réponse à la question de sécurité doit être rempli"
+						createUserText: "Créer l'utilisateur!",
+						firstNameFoundText: "Numéro d'utilisateur est déja pris!",
+						invalidNameText: "Votre prénom ne peut pas être vide",
+						invalidPinLengthText: "Votre NIP dois être en 4 à 50 charactères",
+						invalidSecurityQuestionText: "Votre question de sécurité ne peut pas être vide!",
+						invalidSecurityAnswerText: "Votre réponse à la question de sécurité ne peut pas être vide!",
+						alrightText: "Super!",
+						invalidPinText: "NIP invalide",
+						soundsGoodText: "Ça parait bien!",
+						invalidSecurityQuestion: "Question de securité invalide",
+						invalidSecurityAnswer: "Réponse de securité est invalide",
+						invalidLogin: "Numéro d'utilisateur invalide!"
 					}
 				}
 						
 				case "recoverUser.html": {
 					return {
-						recoverUserText: "Rétablir un compte d’utilisateur", //"Récupérer un compte d’utilisateur",
-						cantFindNameText: "Le compte n’existe pas!",
-						nameOfAccountText: "Quel est le nom du compte que vous tentez de récupérer? ",
-						firstNameText: "Prénom",
-						findNameText: "Trouver le nom",
-						wrongAnswerText: "Ce n'est pas la réponse!",
-						answerToQuestionText: "Quelle est la réponse à la question de sécurité suivante?",
-						securityAnswerText: "Réponse à la question de sécurité",
-						submitAnswerText: "Soummetre une réponse", //"Envoyer une réponse",
-						invalidPinText: "Votre code NIP doit contenir entre 4 et 50 caractères!",//"Votre code doit avoir entre 4 et 50 caractères!"
-						enterNewPinText: "S'il vous plaît entrer votre nouveau code NIP", //"S'il vous plaît entrer votre nouvelle broche"
-						characterLengthText: "Un minimum de 4 charactères pour le NIP", //"4-50 NIP de caractère"
-						setNewPinText: "Soumettre un noubeau NIP" //"Définir une nouvelle broche"
+						recoverUserText: "Récupérer l'utilisateur" ,
+						cantFindNameText: "Nous n'avons pas pu trouver ce nom!",
+						nameOfAccountText: "Quel est le nom du compte que vous êtes en train de récupérer?",
+						firstNameText: "Numéro de l'utilisateur",
+						findNameText: "Trouvez le nom",
+						wrongAnswerText: "Ce n'est pas la bonne réponse!",
+						answerToQuestionText: "Quelle est la réponse de la question de sécurité suivante?",
+						securityAnswerText: "Réponse de sécurité",
+						submitAnswerText: "Soumettre une réponse",
+						enterNewPinText: "S'il vous plaît entrez votre nouveau NIP",
+						characterLengthText: "NIP avec un minimum de 4 charactères",
+						setNewPinText: "Soumettre le nouveau NIP",
+						nameNotFoundText: "Nom introuvable!",
+						tryAgainText: "Essayez de nouveau!",
+						incorrectAnswerText: "réponse incorrecte",
+						invalidPinText: "NIP invalide",
+						invalidPinLengthText: "Votre NIP dois être en 4 à 50 charactères",
+						alrightText: "Super!",
+						
 					}
 				}
 				
-				case "wellnesstracker.html": { //all trasnlated but Welness tracker
+				case "wellnesstracker.html": { 
 					return {
-						wellnessTrackerTitleText: "Journal de bord sur le bien-être",
-						resPageText: "Choisissez la liste de ressources qui vous convient",
+						wellnessTrackerTitleText: "Journal de bord sur le bien-être", //Wellness Tracker / Wellness Journal / Wellness Tool / 
 						buttonText1: "Registre quotidien", //"Journal quotidien",
 						buttonText2: "Graphique",
 					}
@@ -870,9 +902,9 @@ export class TranslationService {
 					}
 				}
 				
-				case "checkinLogInfo.html": {
+				case "checkinLog.html": {
 					return {
-						checkinLogInfoText: "Vérifier l'information concernant les registres quotidiennes", //"Information relative au journal des inscriptions quotidiennes",
+						checkinLogText: "Journal d'enregistrement",
 						dateText: "Date",
 						moodText: "Humeur",
 						dietText: "Régime",
@@ -889,7 +921,7 @@ export class TranslationService {
 						resPageText: "Choissisez la liste de ressource qui s'applique à vous", //"Choose the resource list that applies to you"
 						buttonText1: "Êtes-vous en crise?", // "Employee Assistance Services",
 						buttonText1AriaLabel: "Services d'assistance pour employé button", // "Employee Assistance Services button"
-						buttonText2: "Besoin de conseil?", //"Besoin de counseling?"
+						buttonText2: "Besoin de soutien?", //"Besoin de counseling?"
 						buttonText2AriaLabel: "Besoin de conseil button", //"Besoin de counseling button"
 						buttonText3: "Êtes-vous victime d'harcèlement?", // "Êtes-vous victime de harcèlement?"
 						buttonText3AriaLabel: "Êtes-vous victime d'harcèlement button", //"Êtes-vous victime de harcèlement button"
@@ -897,9 +929,9 @@ export class TranslationService {
 						buttonText4AriaLabel: "Avez-vousvécu un événement traumatisant button", //"Vous avez vécu un événement traumatisant button"
 						buttonText5: "Faisez-vous face à des conflits?", //
 						buttonText5AriaLabel: "Faisez-vous face à des conflits button", //
-						buttonText6: "Êtes-vous menacé", //
+						buttonText6: "Êtes-vous menacé?", //
 						buttonText6AriaLabel: "Menaces button", //
-						buttonText7: "Êtes-vous de retour au travail?", //
+						buttonText7: "Retournez-vous au travail?", //
 						buttonText7AriaLabel: "Êtes-vous de retour au travail button", //
 						buttonText8: "Avez-vous des problèmes liés à l’assiduité?", //
 						buttonText8AriaLabel: "Avez-vous des problèmes liés à l’assiduité button", //
@@ -1224,7 +1256,7 @@ export class TranslationService {
 				
 				case "HarassmentPreventionProgram": {
 					return {
-						title: "Êtes-vous victime de harcèlement?",
+						title: "Êtes-vous victime d'harcèlement?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme sur la prévention du harcèlement (PPH) fournit des renseignements et des conseils aux employés et gestionnaires/superviseurs dans les cas présumés de harcèlement.",
 						mainParagraphAriaLabel: "Harassment Prevention Program Summary",
@@ -1442,7 +1474,7 @@ export class TranslationService {
 					return {
 						title: "Êtes-vous en crise?",
 						callnowText: "",
-						mainParagraph: "Vous pouvez appeler le Centre d’orientation et de gestion de crise 24 heures sur 24, 365 jours par année, au 1-800-268-7708, pour obtenir immédiatement et sans frais l’aide d’un conseiller professionnel.",
+						mainParagraph: "Vous pouvez appeler le Centre d’orientation et de gestion de crise, 24 heures sur 24, 365 jours par année, au 1-800-268-7708, pour obtenir immédiatement et sans frais l’aide d’un conseiller professionnel.",
 						mainParagraphAriaLabel: "Êtes-vous en crise Summary",
 						mainParagraph2: "Le service ATS (appareil de télécommunication pour personnes sourdes) est disponible au 1 800 567 5803 du lundi au vendredi, de 7 h 30 à 23 h (HNE). Un service de relais est disponible en dehors de ces heures. ",
 						mainParagraph2AriaLabel: "",

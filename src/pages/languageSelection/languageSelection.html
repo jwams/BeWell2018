@@ -1,40 +1,54 @@
-<ion-header>
-
-</ion-header>
+<ion-header></ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row text-center style="margin-top: 15%">
-			<ion-col text-center>
-				<h2 class="md-display-1" attr.aria-label="Mental Health App">Mental Health App</h2>
+    <ion-grid style="height: 100%">
+		<ion-row align-items-center style="height: 100%">
+			<ion-col align-self-center>
+				<ion-row text-center align-items-center>
+					<ion-col text-center>
+						<div>
+							<h2 class="md-display-1" attr.aria-label="Mental Health App">Mental Health App</h2>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row text-center align-items-center>
+					<ion-col>
+						<div>
+							<button ion-button (click)="setLanguage('en')" attr.aria-label="English"><strong>English</strong></button>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row text-center align-items-center>
+					<ion-col>
+						<div>
+							<button ion-button block [navPush] = "tocen">Terms and Conditions</button>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row text-center style="margin-top: 20%" align-items-center>
+					<ion-col>
+						<div>
+							<h2 class="md-display-1" aria-label="App Santé mentale">App Santé Mentale</h2>
+						</div>
+					</ion-col>
+				</ion-row>
+				<ion-row text-center align-items-center>
+					<ion-col>
+						<div>
+							<button ion-button (click)="setLanguage('fr')" aria-label="Français" ><strong>Français</strong></button>
+						</div>
+					</ion-col>
+				</ion-row>
+				
+				<ion-row text-center align-items-center>
+					<ion-col>
+						<div>
+							<button ion-button block [navPush] = "tocfr">Termes et Conditions</button>
+						</div>
+					</ion-col>
+				</ion-row>
 			</ion-col>
 		</ion-row>
-		<ion-row text-center>
-			<ion-col>
-				<button ion-button (click)="setLanguage('en')" attr.aria-label="English"><strong>English</strong></button>
-			</ion-col>
-		</ion-row>
-		<ion-row text-center>
-			<ion-col>
-                                <button ion-button block [navPush] = "tocen">Terms and Conditions</button>
-			</ion-col>
-		</ion-row>
-		<ion-row text-center style="margin-top: 20%">
-			<ion-col>
-				<h2 class="md-display-1" aria-label="App Santé mentale">App Santé Mentale</h2>
-			</ion-col>
-		</ion-row>
-		<ion-row text-center>
-			<ion-col>
-				<button ion-button (click)="setLanguage('fr')" aria-label="Français" ><strong>Français</strong></button>
-			</ion-col>
-		</ion-row>
-		
-		<ion-row text-center>
-			<ion-col>
-                            <button ion-button block [navPush] = "tocfr">Termes et Conditions</button>
-			</ion-col>
-		</ion-row>  
     </ion-grid>
 </ion-content>
 

@@ -1,22 +1,33 @@
+<!-- Header -->
 <ion-header>
     <ion-navbar>
+	
+		<!-- Menu Button (Top Left) -->
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
+		
+		<!-- Header Banner Title -->
         <ion-title attr.aria-label="{{pageElements.newUserText}}" *ngIf="pageElementsLoaded">
             {{pageElements.newUserText}}
         </ion-title>
     </ion-navbar>
 </ion-header>
 
+<!-- Loading Spinner --> 
+<div *ngIf="!pageElementsLoaded">
+    <ion-spinner></ion-spinner>
+</div>
+
 <ion-content padding>
 	
     <ion-grid *ngIf="pageElementsLoaded">
+	
         <!-- First name label and input field -->
         <ion-row>
             <ion-col>
-                <ion-label color="primary">{{pageElements.firstNameText}}</ion-label>
-                <ion-input placeholder="{{pageElements.firstNameText}}" [(ngModel)]="firstName" attr.aria-label="{{pageElements.firstNameInput}}"></ion-input>
+                <ion-label color="primary">{{pageElements.loginIDText}}</ion-label>
+                <ion-input placeholder="{{pageElements.loginIDText}}" [(ngModel)]="firstName" attr.aria-label="{{pageElements.loginIDText}}"></ion-input>
             </ion-col>
         </ion-row>
 		

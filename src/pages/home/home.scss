@@ -37,4 +37,23 @@ page-home {
 	.headerTitleText {
 		font-size: 8px;
 	}
+	
+	.label-md {
+		margin-right: 0 !important;
+	}
+	
+	.toastClass {
+		text-align: center;
+		color: white;
+		background-color: blue;
+	}
 }
+
+.toastClass  {
+	text-align: center;
+	color: white;
+}
+	
+.toast-container {
+    background-color: #5f76de;
+}   

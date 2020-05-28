@@ -7,4 +7,18 @@ page-login {
         vertical-align:text-center;
         
     }
+	
+	.nopadding {
+		width: 100% !important;
+		padding: 0 !important;
+	}
+	
+	.scroll-content {
+		width: 100% !important;
+		padding: 0 !important;
+	}
+	
+	.col[col-3] {
+		padding-left: 0;
+	}
 }

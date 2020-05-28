@@ -5,17 +5,50 @@ page-wellnesstracker {
         width: 100%;
     }
 	
-	.center > * {
-		display: flex!important;
-		align-content: center!important;
-		align-items: center!important;
-	}
-	
 	.center-grid {
 		margin-bottom: 50px;
 	}
 	
 	.newEntrybutton {
 		font-size: 18px;
+	}
+	
+	.label-md {
+		margin: 10px 0 20px 0 !important;
+	}
+	
+	.center > * {
+		display: flex!important;
+		align-content: center!important;
+		align-items: center!important;
+	}
+	
+	.smallerFontSize {
+		.toolbar-title-md {
+			font-size: 12px !important;
+		}
+	}
+	
+	.noborder {
+		border-width: 0 !important;
+		border-style: 0 !important;
+	}
+	
+	.item-md.item-block .item-inner {
+		border-bottom: 0;
+	}
+	
+	.item-md {
+		padding: 0;
+	}
+	
+	.picture {
+		width: 50%;
+		height: 50%;
+	}
+	
+	.circle {
+		height: 100px !important;
+		width: 100px !important;
 	}
 }

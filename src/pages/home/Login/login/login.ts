@@ -13,6 +13,10 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 // Import for Translation Service
 import { TranslationService } from './../../../../assets/services/translationService';
 
+import * as PH from "password-hash";
+
+import * as CryptoJS from 'crypto-js';
+
 // ------------------------- Page Specific Imports ------------------------- //
 
 // Animation Imports
@@ -21,14 +25,12 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 // Alert Controller Imports
 import { AlertController, MenuController } from 'ionic-angular';
 
-// Page Imports
+// ------------------------- Page Imports ------------------------- //
+
 import { NewUser } from '../newUser/newUser'; // newUser.html
 import { RecoverUser } from '../recoverUser/recoverUser'; // recoverUser.html
 import { HomePage } from '../../home'; // home.html
-
-import * as PH from "password-hash";
-
-import * as CryptoJS from 'crypto-js';
+import { LanguageSelection } from '../../../languageSelection/languageSelection';
 
 @Component({
     selector: 'page-login',
@@ -48,17 +50,16 @@ import * as CryptoJS from 'crypto-js';
 
 export class Login {
 
-	// ------------------------- Mandatory variables for all pages ------------------------- //
+	// ------------------------- Mandatory variables for most pages ------------------------- //
 
 	// Stores our SQLite3 table data
 	private userRecords: any = [];
 	
 	// Our persistent connection to our DB which is set in initDB()
 	private openDatabase: SQLiteObject;
-    private openWTDatabase: SQLiteObject;
         	
 	// The actual content of the page, fetched via translationService.ts
-	private pageElements: Object;
+	private pageElements: any;
 	
 	// Controls whether our view is loaded based off of if pageElements has been loaded
 	private pageElementsLoaded: boolean = false;
@@ -69,26 +70,52 @@ export class Login {
 	private pin: string;
 	private firstName: string;
 	private userID: string;
-
-    private hashedPassword: any;
+	
+	private languageFlag: String = "en";
          
 	private fadeState: String = 'visible';
 	
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
-	//private aes256: any;
+    constructor(public navCtrl: NavController, private sqlite: SQLite, public alertCtrl: AlertController, private storage: Storage, private menu: MenuController, private translationService: TranslationService) {}
 	
-    constructor(public navCtrl: NavController, private sqlite: SQLite, public alertCtrl: AlertController, private storage: Storage, private menu: MenuController, private translationService: TranslationService) {	
-        this.authenticate();
-        this.configuration();
-		let test1 = "2";
-		let test2 = CryptoJS.AES.encrypt(test1, "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ").toString();
-		let test3 = CryptoJS.AES.decrypt(test2, "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ").toString(CryptoJS.enc.Utf8);
-		
-		console.log("test1: " + test1);
-		console.log("test2: " + test2);
-		console.log("test3: " + test3);
+	ionViewWillEnter() {
+		this.authenticate();
+        this.configuration();	
+    } 
+	
+	// Returns the decrypted version of value: any
+	decrypt(value) {
+		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
 	}
+	
+	// Returns the encrypted string version of value: any
+	encrypt(value) {
+		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
+	}
+	
+	// Fetch the page's content and set the language flag
+    configuration() {
+		
+        // Fetch the current language flag set in storage, once complete, call the translation service to load the correct page content in the chosen language 
+		this.storage.get("languageFlag").then((value) => {
+            if(value != null) {
+				
+				// Load the page's content
+                this.pageElements = this.translationService.load("login.html", value);
+				
+				// Once the content has been loaded, set our page loaded flag to true
+				this.pageElementsLoaded = true;
+				
+				this.languageFlag = value;
+            } 
+            else {
+                console.log("No language flag set");
+            }			
+		});
+		
+		this.initDB(false);
+    }
 	
 	authenticate() {
 
@@ -98,30 +125,6 @@ export class Login {
 				this.navCtrl.setRoot(HomePage);
 			}
 		});
-	}
-	
-	decrypt(value) {
-		return CryptoJS.AES.decrypt(value, this.key).toString(CryptoJS.enc.Utf8);
-	}
-	
-	encrypt(value) {
-		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
-	}
-	
-	configuration() {
-		
-		// Fetch the content from our language translation service
-		this.storage.get("languageFlag").then((value) => {
-			if(value != null) {
-				this.pageElements = this.translationService.load("login.html", value);
-				this.pageElementsLoaded = true;
-			} else {
-				// Handle null language flag
-			}
-		});
-
-		// Call initDB without the login flag
-		this.initDB(false);
 	}
 
 	// Redirect the user to newUser.html
@@ -137,6 +140,10 @@ export class Login {
 	// Our login method, call initDB() with the login flag
 	login() {
 		this.initDB(true);
+	}
+	
+	languageSelection() {
+		this.navCtrl.push(LanguageSelection);
 	}
 	
 	// This method will show an alert based off the title, subtitle, and button text inputs
@@ -182,6 +189,7 @@ export class Login {
 	}
 	
 	loginProcess() {
+		
 		// If found
 		if(this.checkPin()) {
 			console.log("User ID:" + this.userID);
@@ -192,15 +200,13 @@ export class Login {
 
 		// If not found
 		} else {
-			this.showAlert("Invalid Login", "The first name or pin you have entered wasn't found", "Let's try again!");
+			this.showAlert(this.pageElements.invalidLogin, this.pageElements.invalidLoginDesc, this.pageElements.tryAgain);
 		}
 	}
 	
 	// Creates a connection to our DB, performs the login process if given the login flag
 	initDB(loginFlag) {
-		
-		
-		
+
 		this.sqlite.create({
 			name: 'users_CSC.db',
 			location: 'default'
@@ -209,7 +215,7 @@ export class Login {
 			// Take the open connection and save it to our openDatabase variable
 			this.openDatabase = db;
 
-			// If the table hasn't been created yet, create it (This will eventually be moved to an initial script that'll run on launch
+			// If the table hasn't been created yet, create it
 			db.executeSql('CREATE TABLE IF NOT EXISTS users(rowid INTEGER PRIMARY KEY, firstName TEXT, pin TEXT, securityQuestion TEXT, securityAnswer TEXT)', {} as any)
 			.then(res => console.log('Executed SQL'))
 			.catch(e => console.log(e));
@@ -220,12 +226,7 @@ export class Login {
 
 					// Store them all in our userRecords variable
 					this.userRecords = [];
-					/*console.log("Login.html:");
-					console.log("RowID: " + res.rows.item(i).rowid);
-					console.log("firstName: " + res.rows.item(i).firstName);
-					console.log("pin: " + res.rows.item(i).pin);
-					console.log("securityQuestion: " + res.rows.item(i).securityQuestion);
-					console.log("securityAnswer: " + res.rows.item(i).securityAnswer);*/
+					
 					for(var i=0; i<res.rows.length; i++) {
 						
 						this.userRecords.push({rowid:res.rows.item(i).rowid, firstName:this.decrypt(res.rows.item(i).firstName), pin:this.decrypt(res.rows.item(i).pin), securityQuestion:this.decrypt(res.rows.item(i).securityQuestion), securityAnswer:this.decrypt(res.rows.item(i).securityAnswer)})

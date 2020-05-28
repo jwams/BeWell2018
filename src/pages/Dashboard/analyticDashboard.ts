@@ -54,6 +54,8 @@ export class Dashboard {
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
 	
+	private languageFlag: string = "en";
+	
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 
     // ------------------------- Page Specific Variables ------------------------- //
@@ -82,9 +84,11 @@ export class Dashboard {
     fromDate: Date;
     toDate: Date;
 
-    constructor(public navCtrl: NavController, private sqlite: SQLite, public alertCtrl: AlertController, private storage: Storage, private translationService: TranslationService) {
-        this.authenticate();
-        this.configuration();
+    constructor(public navCtrl: NavController, private sqlite: SQLite, public alertCtrl: AlertController, private storage: Storage, private translationService: TranslationService) { }
+	
+	ionViewWillEnter() {
+		this.authenticate();
+        this.configuration();	
     }
 
     // Grabs login flag from local storage, if null, redirect to login page
@@ -110,6 +114,8 @@ export class Dashboard {
 				
                 this.pageElements = this.translationService.load("analyticDashboard.html", value);
                 this.pageElementsLoaded = true;
+				
+				this.languageFlag = value;
                 
                 // Initialize our DB
                 this.initDB();
@@ -160,6 +166,20 @@ export class Dashboard {
 	encrypt(value) {
 		return CryptoJS.AES.encrypt(value.toString(), this.key).toString();
 	}
+	
+	changeLanguage() {
+		
+		if(this.languageFlag == "en") {
+			this.languageFlag = "fr";
+		} else if(this.languageFlag == "fr") {
+			this.languageFlag = "en";
+		}
+		
+        this.storage.set("languageFlag", this.languageFlag).then((value) => {
+            //this.events.publish('languageFlag:changed', this.languageFlag);
+            this.pageElements = this.translationService.load("analyticDashboard.html", this.languageFlag);
+        });	
+    }
 
     // Generates a chart based off data from view
     generate(fromDate, toDate) {

@@ -5,12 +5,12 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-		 <ion-title attr.aria-label="{{pageElements.wellnessTrackerTitleText}}" *ngIf="pageElementsLoaded">{{pageElements.wellnessTrackerTitleText}}</ion-title>
+		<ion-title attr.aria-label="{{pageElements.wellnessTrackerTitleText}}" *ngIf="pageElementsLoaded" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">{{pageElements.wellnessTrackerTitleText}}</ion-title>
 		<ion-buttons end>
-            <button ion-button icon-only (click)="addData()" class="newEntrybutton">
-                <ion-icon name="add-circle"></ion-icon>
-            </button>
-        </ion-buttons>
+			<button ion-button icon-only (click)="changeLanguage()">
+				<ion-icon name="globe" class="languageChangeButton"></ion-icon>
+			</button>
+		</ion-buttons>
     </ion-navbar>
 
 </ion-header>
@@ -20,25 +20,26 @@
 	<ion-spinner></ion-spinner>
 </div>
 
-<ion-content padding *ngIf="pageElementsLoaded" class="center">
-           
-    <div class="center">
-
-        <ion-row>	
-            <ion-col style="margin-bottom: 20px">
-                <button ion-button round outline class="circlebtn" [navPush]="checkinlog"><img src="./assets/Icons/dailyLog.svg" /></button>
-                <ion-label text-center>{{pageElements.buttonText1}}</ion-label>    
-            </ion-col>
-        </ion-row>
-            
-		<ion-row>	
-            <ion-col style="margin-bottom: 20px">
-                <button ion-button round outline class="circlebtn" [navPush]="dashboard"><img src="./assets/Icons/graph.svg" /></button>
-                <ion-label text-center>{{pageElements.buttonText2}}</ion-label>
-            </ion-col>
-		</ion-row>
-			
-    </div>        
+<ion-content padding *ngIf="pageElementsLoaded">
+    <ion-grid style="height: 100%">       
+		<ion-row style="height: 100%" align-items-center>
+			<ion-col align-self-center>
+				<ion-row align-items-center>	
+					<ion-col align-self-center text-center>
+						<button ion-button round outline class="circlebtn circle" [navPush]="checkinlog"><img class="picture" src="./assets/Icons/dailyLog.svg" /></button>  
+						<ion-label text-center text-wrap>{{pageElements.buttonText1}}</ion-label>    
+					</ion-col>
+				</ion-row>
+					
+				<ion-row align-items-center >
+					<ion-col align-self-center text-center>
+						<button ion-button round outline class="circlebtn circle" [navPush]="dashboard"><img class="picture"  src="./assets/Icons/graph.svg" /></button>
+						<ion-label text-center text-wrap>{{pageElements.buttonText2}}</ion-label>    
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>   
+	</ion-grid>
 
 </ion-content>
 

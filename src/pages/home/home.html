@@ -1,36 +1,46 @@
+<!-- Header -->
 <ion-header>
   <ion-navbar hideBackButton="true" >
-    <button ion-button menuToggle>
+    
+	<!-- Menu Button (Top Left) -->
+	<button ion-button menuToggle>
         <ion-icon name="menu" persistent="true"></ion-icon>
     </button>
+	
+	<!-- Header Banner Title -->
 	<ion-title attr.aria-label="{{pageElements.homeTitleText}}" *ngIf="pageElementsLoaded" class="headerTitleText">
 		{{pageElements.homeTitleText}}
 	</ion-title>
+	
+	<!-- Change Language Button (Top right globe) -->
     <ion-buttons end>
-      <button ion-button icon-only (click)="addData()" class="newEntrybutton">
-			<ion-icon name="add-circle"></ion-icon>
-      </button>
-    </ion-buttons>
+		<button ion-button icon-only (click)="changeLanguage()">
+			<ion-icon name="globe" class="languageChangeButton"></ion-icon>
+		</button>
+	</ion-buttons>
+  
   </ion-navbar>
 </ion-header>
 
-<!-- Loading Div --> 
+<!-- Loading Spinner --> 
 <div *ngIf="!pageElementsLoaded">
     <ion-spinner></ion-spinner>
 </div>
 
 <ion-content padding>
+
+	<!-- Main div (Could replace center class with ionic centering but might be worth waiting until the ionic v3 -> v5 upgrade -->
 	<div class="center" *ngIf="pageElementsLoaded">
 		<ion-row style="margin-top: 50px">
 		
 			<!-- Daily Entry Button -->
-			<ion-col text-center style="margin-bottom: 20px; width: 50%;">
+			<ion-col text-center class="columnSpacing">
 				<button ion-button round outline  class="circlebtn iconimg dashboardButton" [navPush]="dailyentry"><img src="./assets/Icons/checkIn.svg" class="iconDashboard"/></button>
 				<ion-label text-center text-wrap>{{pageElements.buttonText1}}</ion-label>    
 			</ion-col>
 			
 			<!-- Wellness Tracker Button -->
-			<ion-col text-center style="margin-bottom: 20px; width: 50%;">
+			<ion-col text-center class="columnSpacing">
 				<button ion-button round outline class="circlebtn iconimg dashboardButton" [navPush]="wellnesstracker"><img src="./assets/Icons/wellnessTracker.svg" class="iconDashboard" /></button>
 				<ion-label text-center text-wrap>{{pageElements.buttonText2}}</ion-label>    
 			</ion-col>                 
@@ -40,14 +50,14 @@
 		<ion-row>
 		
 			<!-- Resources Button -->
-			<ion-col text-center style="margin-bottom: 20px; width: 50%;">
+			<ion-col text-center class="columnSpacing">
 				<button ion-button round outline class="circlebtn iconimg dashboardButton" [navPush]="resources"><img src="./assets/Icons/resources.svg" class="iconDashboard" /></button>
 				<ion-label text-center text-wrap>{{pageElements.buttonText4}}</ion-label>    
 			</ion-col>        
 		
-			<!-- Tools Placeholder -->
-			<ion-col text-center style="margin-bottom: 20px; width: 50%;">
-				<button ion-button round outline class="circlebtn iconimg dashboardButton" [navPush]="signout"><img src="./assets/Icons/wrench.svg" class="iconDashboard" /></button>
+			<!-- Log Off Button -->
+			<ion-col text-center class="columnSpacing">
+				<button ion-button round outline class="circlebtn iconimg dashboardButton" [navPush]="signout"><img src="./assets/Icons/RtWP.svg" class="iconDashboard" /></button>
 				<ion-label text-center text-wrap>{{pageElements.buttonText3}}</ion-label>    
 			</ion-col>   
 			         

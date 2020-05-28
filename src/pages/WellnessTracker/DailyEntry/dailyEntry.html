@@ -6,6 +6,11 @@
             </button>
         </ion-buttons>
         <ion-title attr.aria-label="{{pageElements.dailyEntryText}}" *ngIf="pageElementsLoaded">{{pageElements.dailyEntryText}}</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="changeLanguage()">
+				<ion-icon name="globe" class="languageChangeButton"></ion-icon>
+			</button>
+		</ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -48,7 +53,7 @@
         
             <ion-row>			
 				<ion-item no-lines>
-					<ion-range min="1" max="10" [(ngModel)]="data.moodScore" name="moodScore" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
+					<ion-range min="0" max="10" [(ngModel)]="data.moodScore" name="moodScore" color="moodColor" pin="true" class="slider" (ionChange)="updateScores()">
 						<div range-left attr.aria-label="{{pageElements.moodText}}" class="titleText" slot="start">{{pageElements.moodText}}</div>
 					</ion-range>
 				</ion-item>     
@@ -56,7 +61,7 @@
             
             <ion-row>
 				<ion-item no-lines>
-					<ion-range min="1" max="10" [(ngModel)]="data.dietScore" name="dietScore" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
+					<ion-range min="0" max="10" [(ngModel)]="data.dietScore" name="dietScore" color="dietColor" pin="true" class="slider" (ionChange)="updateScores()">
 						<div range-left attr.aria-label="{{pageElements.dietText}}" class="titleText" slot="start">{{pageElements.dietText}}</div>
 					</ion-range>
 				</ion-item>
@@ -64,7 +69,7 @@
             
             <ion-row style="margin-bottom: 20px;">                
                 <ion-item no-lines>
-                    <ion-range min="1" max="10" [(ngModel)]="data.sleepScore" name="sleepScore" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
+                    <ion-range min="0" max="10" [(ngModel)]="data.sleepScore" name="sleepScore" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
                         <ion-label range-left attr.aria-label="{{pageElements.sleepText}}" class="titleText">{{pageElements.sleepText}}</ion-label>
                     </ion-range>
                 </ion-item> 

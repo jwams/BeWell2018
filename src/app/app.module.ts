@@ -45,6 +45,8 @@ import { Toast } from '@ionic-native/toast';
 import { TranslationService } from '../assets/services/translationService';
 //import { DatabaseService } from '../assets/services/databaseService';
 
+
+
 @NgModule({
     declarations: [
         MyApp,

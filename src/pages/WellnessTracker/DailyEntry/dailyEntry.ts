@@ -3,6 +3,8 @@
 // Component Imports
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+
 
 // Alert Imports
 import { AlertController } from 'ionic-angular';
@@ -46,6 +48,8 @@ export class DailyEntry {
 
     private openDatabase: SQLiteObject;
 	
+	private languageFlag: string = "en";
+	
 	private key: String = "A?D(G+KbPeShVkYp3s6v9y$B&E)H@McQ";
 	
 	private submitFlag: boolean = true;
@@ -63,10 +67,12 @@ export class DailyEntry {
 	
 	private totalScore: number = 0;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite, private toast: Toast, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {
-        this.authenticate();
-        this.configuration();
+	ionViewWillEnter() {
+		this.authenticate();
+        this.configuration();	
     }
+
+    constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, private sqlite: SQLite, private toast: Toast, private storage: Storage, private translationService: TranslationService, public alertCtrl: AlertController) {    }
 
     configuration() {
 
@@ -77,11 +83,11 @@ export class DailyEntry {
 				} else if(value == "fr") {
 					moment().locale('fr');
 				}
+				
+				this.languageFlag = value;
+				
                 this.pageElements = this.translationService.load("dailyEntry.html", value);
                 this.pageElementsLoaded = true;
-                console.log("this.data.date: " + this.data.date);
-                console.log("this.date.dateTime: " + this.data.dateTime);
-                console.log(this.pageElements);
                 this.initDB();
             } else {
                 // Handle null language flag
@@ -111,6 +117,26 @@ export class DailyEntry {
             this.userID = value;
         });	
     }
+
+	presentToast() {
+		
+		let message = "";
+		
+		if(this.languageFlag == "en") {
+			message = "Language changed to English";
+		} else if(this.languageFlag == "fr") {
+			message = "Langue changée au français";
+		}
+		
+		const toast = this.toastCtrl.create({
+			message: message,
+			duration: 2000,
+			cssClass: "toastClass",
+			dismissOnPageChange: true
+		});
+		
+		toast.present();
+	}
 
     updateScores(selectedValue: any) {
         this.totalScore = Math.floor((this.data.moodScore + this.data.sleepScore + this.data.dietScore)/3);
@@ -183,5 +209,20 @@ export class DailyEntry {
     //POP a page off the menu stack        
     goBack() {
         this.navCtrl.pop();
+    }
+	
+	changeLanguage() {
+		
+		if(this.languageFlag == "en") {
+			this.languageFlag = "fr";
+		} else if(this.languageFlag == "fr") {
+			this.languageFlag = "en";
+		}
+		
+        this.storage.set("languageFlag", this.languageFlag).then((value) => {
+            //this.events.publish('languageFlag:changed', this.languageFlag);
+            this.pageElements = this.translationService.load("dailyEntry.html", this.languageFlag);
+			this.presentToast();
+        });	
     }
 }
