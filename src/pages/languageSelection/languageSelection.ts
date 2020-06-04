@@ -4,7 +4,8 @@ import { Events } from 'ionic-angular';
 
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+
+import { Storage } from '@ionic/storage'; 
 
 import { Login } from '../home/Login/login/login';
 import { TOCFR } from './TOCFR/tocfr';
@@ -23,10 +24,13 @@ export class LanguageSelection {
 
     // Set the language cookie, informs app.component.ts to redraw the menu, and then redirect to login.html
     setLanguage(language) {
+		console.log("HIT1");
+		
         this.storage.set("languageFlag", language).then((value) => {
-            this.events.publish('languageFlag:changed', language);
+            //this.events.publish('languageFlag:changed', language);
+			console.log("HIT2");
             this.navCtrl.setRoot(Login);
-        });	
+        });
     }
 }
 

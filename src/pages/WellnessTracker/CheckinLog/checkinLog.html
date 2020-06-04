@@ -20,11 +20,11 @@
 			
 			<!-- Coloured Circle, depending on log score -->
 			<ion-col col-3>
-				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 23">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) >= 23">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/green.png">
 				</div>
 				
-				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) > 16 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) <= 22">
+				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) >= 16 && totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) <= 22">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/orange.png">
 				</div>
 				

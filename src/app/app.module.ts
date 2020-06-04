@@ -43,6 +43,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Toast } from '@ionic-native/toast';
 
 import { TranslationService } from '../assets/services/translationService';
+import { StorageService } from '../assets/services/storageService';
 //import { DatabaseService } from '../assets/services/databaseService';
 
 
@@ -121,6 +122,7 @@ import { TranslationService } from '../assets/services/translationService';
 	StatusBar,
 	SplashScreen,
 	TranslationService,
+	StorageService,
 	{provide: ErrorHandler, useClass: IonicErrorHandler},
 	SQLite,
 	

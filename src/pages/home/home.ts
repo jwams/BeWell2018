@@ -5,12 +5,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 
-// Local Storage Import
-import { IonicStorageModule } from '@ionic/storage';
-import { Storage } from '@ionic/storage';
-
 // SQLite3 Imports
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+
+// Local Storage Import
+import { Storage } from '@ionic/storage';
 
 // Import for Translation Service
 import { TranslationService } from '../../assets/services/translationService';
@@ -52,7 +51,7 @@ export class HomePage {
 	// Language Flag, defaults to English but overwritten on pageload
 	private languageFlag: string = "en";
 
-    constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams, private storage: Storage, private translationService: TranslationService, private sqlite: SQLite) {}
+    constructor(public navCtrl: NavController, public toastCtrl: ToastController, private storage: Storage, public navParams: NavParams, private translationService: TranslationService, private sqlite: SQLite) {}
 	
 	// Method is ran whenever the app's view is changed to this page's view
 	ionViewWillEnter() {
@@ -65,9 +64,10 @@ export class HomePage {
 	
 		// Fetch our login flag and check it's value, if it's null, the user is not logged in so redirect them to the login screen
         this.storage.get("userID").then((value) => {
-            if(value == null) {
-				this.navCtrl.setRoot(Login);
-            }
+			console.log("Value: " + value);
+            //if(value == null) {
+			//	this.navCtrl.setRoot(Login);
+            //}
 		});
     }
     
