@@ -20,6 +20,17 @@ page-checkinLog {
     .sleepText {
 	color: #01579B;
     }
+	
+	.fullHeight {
+		height: 100%;
+	}
+	
+	.alignitemscenter {
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
 
     .moodBackground {
 	min-width: 60px;

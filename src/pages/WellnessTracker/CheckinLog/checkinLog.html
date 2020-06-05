@@ -40,7 +40,7 @@
 			<ion-col col-6>
 			
 				<!-- Date header -->
-				<ion-row justify-content-center align-items-center [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i]}">
+				<ion-row class="fullHeight" justify-content-center [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i], alignitemscenter: !showHideArray[i]}">
 					<ion-col col-auto>
 						{{formatDate(wellness.date)}}
 					</ion-col>
@@ -51,7 +51,7 @@
 			<ion-col col-4>
 				
 				<!-- Time on the right -->
-				<ion-row justify-content-end [ngClass]="{align-items-center: !showHideArray[i]}" class="fullHeight">
+				<ion-row justify-content-end [ngClass]="{alignitemscenter: !showHideArray[i]}" class="fullHeight">
 					<ion-col col-auto>
 						{{wellness.date | date: "H:mma"}}
 					</ion-col>
