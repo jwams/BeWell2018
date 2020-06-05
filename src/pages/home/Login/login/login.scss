@@ -1,11 +1,6 @@
 page-login {
-    ion-content{
-        
+    .background {
         background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto cover;
-        vertical-align:text-center;
-        
     }
 	
 	.nopadding {
@@ -20,5 +15,9 @@ page-login {
 	
 	.col[col-3] {
 		padding-left: 0;
+	}
+	
+	.fullHeight {
+		height: 100%;
 	}
 }

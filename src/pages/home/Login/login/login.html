@@ -1,99 +1,102 @@
-<ion-content padding *ngIf="pageElementsLoaded" class="fade nopadding" style="background-image: url('./assets/imgs/bg.png')"> 
-	<ion-grid>
-		
-		<!-- First Name/Username label -->
-		<ion-row>
-			<ion-col text-center attr.aria-label="{{pageElements.firstNameText}}">
-				{{pageElements.loginIDText}}
-			</ion-col>
-		</ion-row>
-		
-		<!-- First Name/Username field -->
-		<ion-row>
-			<ion-col text-center>
-				<ion-item attr.aria-label="{{pageElements.loginIDInput}}">
-					<ion-input type="text" placeholder="{{pageElements.loginIDText}}" [(ngModel)]="firstName"></ion-input>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-		
-		<!-- Pin label -->
-		<ion-row>
-			<ion-col text-center attr.aria-label="{{pageElements.pinText}}">
-				{{pageElements.pinText}}
-			</ion-col>
-		</ion-row>
-		
-		<!-- Pin field -->
-		<ion-row style="margin-bottom: 15px;">
-			<ion-col text-center>
-				<ion-item attr.aria-label="{{pageElements.pinInput}}">
-					<ion-input type="password" placeholder="{{pageElements.pinText}}" [(ngModel)]="pin"></ion-input>
-				</ion-item>
-			</ion-col>
-		</ion-row>
-		
-		
-		<!-- Due to the average increased character length in French, English and French have different button layouts -->
-		<div *ngIf="languageFlag == 'en'" style="width: 100%">
-		
-			<!-- Login Button -->
-			<ion-row>
-			
-				<ion-col text-center attr.aria-label="{{loginText}}">
-					<button ion-button (click)="login()">{{pageElements.loginText}}</button>
-				</ion-col>
-			</ion-row>
-			
-			<ion-row>
-
-				<!-- Create User Button -->
-				<ion-col col-6 text-center attr.aria-label="{{pageElements.createUserText}}">
-					<button ion-button (click)="newUser()">{{pageElements.createUserText}}</button>
-				</ion-col>
-
-				<!-- Forgot Pin Button -->
-				<ion-col col-6 text-center attr.aria-label="{{pageElements.forgotPinText}}">
-					<button ion-button (click)="recoverUser()">{{pageElements.forgotPinText}}</button>
-				</ion-col>
-			</ion-row>
-			
-			<ion-row>
-			
-				<!-- Change Language Button -->
-				<ion-col text-center attr.aria-label="{{pageElements.changeLanguageText}}">
-					<button ion-button (click)="languageSelection()">{{pageElements.changeLanguageText}}</button>
-				</ion-col>
-			</ion-row>
-		</div>
-		
-		<div *ngIf="languageFlag == 'fr'" style="width: 100%">
-		
-			<!-- Login Button -->
-			<ion-row>
-				<ion-col text-center attr.aria-label="{{loginText}}">
-					<button ion-button (click)="login()">{{pageElements.loginText}}</button>
-				</ion-col>
-			</ion-row>
-			
-			<!-- Create User Button -->
-			<ion-row>
-				<ion-col text-center attr.aria-label="{{pageElements.createUserText}}">
-					<button ion-button (click)="newUser()">{{pageElements.createUserText}}</button>
-				</ion-col>
-			</ion-row>
-			
-			<!-- Forgot Pin Button -->
-			<ion-row>
-				<ion-col offset-2 col-3 text-center attr.aria-label="{{pageElements.forgotPinText}}">
-					<button ion-button (click)="recoverUser()">{{pageElements.forgotPinText}}</button>
-				</ion-col>
+<ion-content padding *ngIf="pageElementsLoaded" class="fade nopadding background fullHeight" style="background-image: url('./assets/imgs/bg.png');"> 
+	<ion-grid class="fullHeight">
+		<ion-row align-items-center class="fullHeight">
+			<ion-col>
+				<!-- First Name/Username label -->
+				<ion-row align-items-center>
+					<ion-col text-center attr.aria-label="{{pageElements.firstNameText}}">
+						{{pageElements.loginIDText}}
+					</ion-col>
+				</ion-row>
 				
-				<!-- Change Language Button -->
-				<ion-col offset-2 col-3 text-center attr.aria-label="{{pageElements.changeLanguageText}}">
-					<button ion-button (click)="languageSelection()">{{pageElements.changeLanguageText}}</button>
-				</ion-col>
-			</ion-row>
-		</div>
+				<!-- First Name/Username field -->
+				<ion-row align-items-center>
+					<ion-col text-center>
+						<ion-item attr.aria-label="{{pageElements.loginIDInput}}">
+							<ion-input type="text" placeholder="{{pageElements.loginIDText}}" [(ngModel)]="firstName"></ion-input>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				
+				<!-- Pin label -->
+				<ion-row align-items-center>
+					<ion-col text-center attr.aria-label="{{pageElements.pinText}}">
+						{{pageElements.pinText}}
+					</ion-col>
+				</ion-row>
+				
+				<!-- Pin field -->
+				<ion-row style="margin-bottom: 15px;">
+					<ion-col text-center>
+						<ion-item attr.aria-label="{{pageElements.pinInput}}">
+							<ion-input type="password" placeholder="{{pageElements.pinText}}" [(ngModel)]="pin"></ion-input>
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				
+				
+				<!-- Due to the average increased character length in French, English and French have different button layouts -->
+				<div *ngIf="languageFlag == 'en'" style="width: 100%">
+				
+					<!-- Login Button -->
+					<ion-row>
+					
+						<ion-col text-center attr.aria-label="{{loginText}}">
+							<button ion-button (click)="login()">{{pageElements.loginText}}</button>
+						</ion-col>
+					</ion-row>
+					
+					<ion-row>
+
+						<!-- Create User Button -->
+						<ion-col col-6 text-center attr.aria-label="{{pageElements.createUserText}}">
+							<button ion-button (click)="newUser()">{{pageElements.createUserText}}</button>
+						</ion-col>
+
+						<!-- Forgot Pin Button -->
+						<ion-col col-6 text-center attr.aria-label="{{pageElements.forgotPinText}}">
+							<button ion-button (click)="recoverUser()">{{pageElements.forgotPinText}}</button>
+						</ion-col>
+					</ion-row>
+					
+					<ion-row>
+					
+						<!-- Change Language Button -->
+						<ion-col text-center attr.aria-label="{{pageElements.changeLanguageText}}">
+							<button ion-button (click)="languageSelection()">{{pageElements.changeLanguageText}}</button>
+						</ion-col>
+					</ion-row>
+				</div>
+				
+				<div *ngIf="languageFlag == 'fr'" style="width: 100%">
+				
+					<!-- Login Button -->
+					<ion-row>
+						<ion-col text-center attr.aria-label="{{loginText}}">
+							<button ion-button (click)="login()">{{pageElements.loginText}}</button>
+						</ion-col>
+					</ion-row>
+					
+					<!-- Create User Button -->
+					<ion-row>
+						<ion-col text-center attr.aria-label="{{pageElements.createUserText}}">
+							<button ion-button (click)="newUser()">{{pageElements.createUserText}}</button>
+						</ion-col>
+					</ion-row>
+					
+					<!-- Forgot Pin Button -->
+					<ion-row>
+						<ion-col offset-2 col-3 text-center attr.aria-label="{{pageElements.forgotPinText}}">
+							<button ion-button (click)="recoverUser()">{{pageElements.forgotPinText}}</button>
+						</ion-col>
+						
+						<!-- Change Language Button -->
+						<ion-col offset-2 col-3 text-center attr.aria-label="{{pageElements.changeLanguageText}}">
+							<button ion-button (click)="languageSelection()">{{pageElements.changeLanguageText}}</button>
+						</ion-col>
+					</ion-row>
+				</div>
+			</ion-col>
+		</ion-row>
 	</ion-grid>
 </ion-content>
