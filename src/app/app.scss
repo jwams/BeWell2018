@@ -71,9 +71,28 @@ ion-label{
 	margin-right: 0 !important;
 }
 
+.label-ios {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.smallerFontSize {
+		.toolbar-title-md {
+			font-size: 12px !important;
+		}
+		
+		.toolbar-title-ios {
+			font-size: 12px !important;
+		}
+	}
+
 .dashboardButton {
 	height: 120px !important;
     width: 120px !important;
+}
+
+.nopadding {
+	padding: 0 !important;
 }
 
 .rectBtn{

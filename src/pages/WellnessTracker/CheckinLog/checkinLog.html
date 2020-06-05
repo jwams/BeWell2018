@@ -41,7 +41,7 @@
 			
 				<!-- Date header -->
 				<ion-row justify-content-center align-items-center [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i]}">
-					<ion-col>
+					<ion-col col-auto>
 						{{formatDate(wellness.date)}}
 					</ion-col>
 				</ion-row>
@@ -51,16 +51,16 @@
 			<ion-col col-4>
 				
 				<!-- Time on the right -->
-				<ion-row justify-content-end>
-					<ion-col>
+				<ion-row justify-content-end [ngClass]="{align-items-center: !showHideArray[i]}" class="fullHeight">
+					<ion-col col-auto>
 						{{wellness.date | date: "H:mma"}}
 					</ion-col>
 					
-					<ion-col *ngIf="!showHideArray[i]">
+					<ion-col *ngIf="!showHideArray[i]" col-auto>
 						<ion-icon name="arrow-dropdown"></ion-icon>
 					</ion-col>
 					
-					<ion-col *ngIf="showHideArray[i]">
+					<ion-col *ngIf="showHideArray[i]" col-auto>
 						<ion-icon name="arrow-dropup"></ion-icon>
 					</ion-col>
 				</ion-row>
@@ -74,7 +74,7 @@
 				
 				<!-- Mood Score -->
 				<ion-row *ngIf="showHideArray[i]" justify-content-end  class="score">
-					<ion-col col-auto>
+					<ion-col col-auto class="nopadding">
 						{{wellness.moodScore}}
 					</ion-col>
 				</ion-row>
@@ -88,7 +88,7 @@
 				
 				<!-- Sleep score -->
 				<ion-row *ngIf="showHideArray[i]" justify-content-end  class="score">
-					<ion-col col-auto>
+					<ion-col col-auto class="nopadding">
 						{{wellness.sleepScore}}
 					</ion-col>
 				</ion-row>
@@ -102,7 +102,7 @@
 				
 				<!-- Diet score -->
 				<ion-row *ngIf="showHideArray[i]" justify-content-end  class="score">
-					<ion-col col-auto>
+					<ion-col col-auto class="nopadding">
 						{{wellness.dietScore}}
 					</ion-col>
 				</ion-row>
