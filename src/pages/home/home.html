@@ -8,7 +8,7 @@
     </button>
 	
 	<!-- Header Banner Title -->
-	<ion-title attr.aria-label="{{pageElements.homeTitleText}}" *ngIf="pageElementsLoaded" class="headerTitleText">
+	<ion-title attr.aria-label="{{pageElements.homeTitleText}}" *ngIf="pageElementsLoaded" class="headerTitleText" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">
 		{{pageElements.homeTitleText}}
 	</ion-title>
 	

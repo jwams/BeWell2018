@@ -5,7 +5,7 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title attr.aria-label="{{pageElements.dailyEntryText}}" *ngIf="pageElementsLoaded">{{pageElements.dailyEntryText}}</ion-title>
+        <ion-title attr.aria-label="{{pageElements.dailyEntryText}}"[ngClass]="{smallerFontSize: languageFlag == 'fr'}" *ngIf="pageElementsLoaded">{{pageElements.dailyEntryText}}</ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only (click)="changeLanguage()">
 				<ion-icon name="globe" class="languageChangeButton"></ion-icon>
@@ -67,14 +67,13 @@
 				</ion-item>
             </ion-row>
             
-            <ion-row style="margin-bottom: 20px;">                
+            <ion-row>
                 <ion-item no-lines>
                     <ion-range min="0" max="10" [(ngModel)]="data.sleepScore" name="sleepScore" color="sleepColor" pin="true" class="slider" (ionChange)="updateScores()">
-                        <ion-label range-left attr.aria-label="{{pageElements.sleepText}}" class="titleText">{{pageElements.sleepText}}</ion-label>
+                        <div range-left attr.aria-label="{{pageElements.sleepText}}" class="titleText" slot="start">{{pageElements.sleepText}}</div>
                     </ion-range>
-                </ion-item> 
+                </ion-item>
             </ion-row>
-            
 <!--            <ion-item no-lines>
                 <ion-range min="1" max="10" [(ngModel)]="data.stressScore" name="stressScore" color="stressColor" pin="true" class="slider" (ionChange)="updateScores()">
                     <ion-label range-left attr.aria-label="{{pageElements.stressText}}">{{pageElements.stressText}}</ion-label>

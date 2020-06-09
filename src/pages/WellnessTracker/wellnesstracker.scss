@@ -4,8 +4,12 @@ page-wellnesstracker {
         position:absolute;
         width: 100%;
     }
-	
-	.center-grid {
+	.titleHeader {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .center-grid {
 		margin-bottom: 50px;
 	}
 	
@@ -25,9 +29,13 @@ page-wellnesstracker {
 	
 	.smallerFontSize {
 		.toolbar-title-md {
-			font-size: 12px !important;
+			font-size: 18px !important;
 		}
-	}
+  
+        .toolbar-title-ios {
+            font-size: 18px !important;
+        }
+    }
 	
 	.noborder {
 		border-width: 0 !important;

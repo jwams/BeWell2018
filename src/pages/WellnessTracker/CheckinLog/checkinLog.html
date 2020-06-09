@@ -5,7 +5,7 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title attr.aria-label="{{pageElements.checkinLogText}}" *ngIf="pageElementsLoaded" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">{{pageElements.checkinLogText}}</ion-title>
+        <ion-title attr.aria-label="{{pageElements.checkinLogText}}" class="titleHeader" *ngIf="pageElementsLoaded" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">{{pageElements.checkinLogText}}</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -51,7 +51,7 @@
 			<ion-col col-4>
 				
 				<!-- Time on the right -->
-				<ion-row justify-content-end [ngClass]="{alignitemscenter: !showHideArray[i]}" class="fullHeight">
+				<ion-row justify-content-end [ngClass]="{alignitemscenter: !showHideArray[i]}">
 					<ion-col col-auto>
 						{{wellness.date | date: "H:mma"}}
 					</ion-col>

@@ -5,7 +5,8 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-		<ion-title attr.aria-label="{{pageElements.dashboardText}}" *ngIf="pageElementsLoaded">{{pageElements.dashboardText}}</ion-title>
+		<ion-title attr.aria-label="{{pageElements.dashboardText}}"[ngClass]="{smallerFontSize: languageFlag == 'fr'}"
+            *ngIf="pageElementsLoaded">{{pageElements.dashboardText}}</ion-title>
 	</ion-navbar>
 </ion-header>
 

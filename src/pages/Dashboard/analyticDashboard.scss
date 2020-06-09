@@ -58,4 +58,14 @@ page-analyticDashboard {
 	.newEntrybutton {
 		font-size: 18px;
 	}
+ 
+    .smallerFontSize {
+          .toolbar-title-md {
+              font-size: 18px !important;
+          }
+    
+          .toolbar-title-ios {
+              font-size: 18px !important;
+          }
+      }
 }

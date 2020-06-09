@@ -51,6 +51,16 @@ page-home {
 		color: white;
 		background-color: blue;
 	}
+    
+     .smallerFontSize {
+           .toolbar-title-md {
+               font-size: 18px !important;
+           }
+     
+           .toolbar-title-ios {
+               font-size: 18px !important;
+           }
+       }
 }
 
 .toastClass  {

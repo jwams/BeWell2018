@@ -28,4 +28,14 @@ page-resinfo {
 		font-weight: bold;
 		font-size: 20px;
 	}
+ 
+ .smallerFontSize {
+       .toolbar-title-md {
+           font-size: 18px !important;
+       }
+ 
+       .toolbar-title-ios {
+           font-size: 18px !important;
+       }
+   }
 }

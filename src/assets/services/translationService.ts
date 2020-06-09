@@ -187,7 +187,7 @@ export class TranslationService {
 						
 				case "resinfo.html": {
 					return {
-						resTitle: "Test Resources",
+						resTitle: "Resources",
 						resParagraph1Text: "Stuff here",
 					  
 					}
@@ -196,7 +196,7 @@ export class TranslationService {
 
 				case "employee.html": {
 					return {
-						resourceTitleText: "Employee Resources",
+						resourceTitleText: "Resources",
 						resPageText: "Choose the resource list that applies.",
 						buttonText1Desc: "These are programs created to assist employees in achieving workplace happiness and wellbeing.",
 						buttonText1: "Assistance Programs",
@@ -211,7 +211,8 @@ export class TranslationService {
 
 				case "employeeFamily.html": {
 					return {
-						resourceTitleText: "Employee Family",
+resourceTitleText: "Resources",
+					
 						resPageText: "Choose the resource list that applies.",
 						buttonText1: "Crisis Hotline",
 						buttonText2: "Employee Assitance Program",
@@ -222,6 +223,7 @@ export class TranslationService {
 										
 				case "public.html": {
 					return {
+
 						resourceTitleText: "Public",
 						resPageText: "Choose the resource list that applies.",
 						buttonText1: "Crisis Hotline",
@@ -233,6 +235,7 @@ export class TranslationService {
 																										
 				case "EmployeeProtectionProtocol": {
 					return {
+resourceTitleText: "Resources",
 						title: "Are you being threatened?",
 						callnowText: "Call now",
 						mainParagraph: "The Employee Protection Protocol (EPP) can help keep you and your family safe from threats, criminal harassment and intimidation. It is not uncommon to encounter difficult behaviour when dealing with offenders. You may experience different degrees of such bahviour depending on what you do and where you work. All threats are not equal. If you feel the situation is not 'normal' you should report it.",
@@ -289,6 +292,7 @@ export class TranslationService {
 						
 				case "EmployeeAssistanceServices": {
 					return {
+resourceTitleText: "Resources",
 						title: "Employee Assistance Services",
 						callnowText: "Call now",
 						mainParagraph: "Employee Assistance Services (EAS) is the national provider of Employee Assistance Program (EAP) services for the Correctional Service of Canada. They maintain the highest level of professionalism and confidentiality.",
@@ -343,6 +347,7 @@ export class TranslationService {
 						
 				case "CriticalIncidentStressManagement": {
 					return {
+resourceTitleText: "Resources",
 						title: "Involved in a traumatic event?",
 						callnowText: "Call now",
 						mainParagraph: "The Critical Incident Stress Management (CISM) program is a crisis intervention system that is designed to support CSC employees and their immediate family members (including a spouse or children who are still living at home). This service is available following critical incidents, which are traumatic events outside the usual range of human experience, such as events involving extreme violence against staff or offenders, severe injury or death, or the witnessing of such events.",
@@ -397,6 +402,7 @@ export class TranslationService {
 						
 				case "DutyToAccomodate": {
 					return {
+resourceTitleText: "Resources",
 						title: "Require accommodation?",
 						callnowText: "Call Now",
 						mainParagraph: "The Duty to Accommodte (DTA) Program ensures that CSC is meeting its legal obligation regarding workplace accommodation as defined by Canadian legislation. The program strives to create a barrier free workplace; prevent discrimination based on a prohibted ground; and to ensure that employees' specific needs are accommodated by offerring equal opportunites for all.",
@@ -451,6 +457,7 @@ export class TranslationService {
 						
 				case "EmployeeAssistanceProgram": {
 					return {
+resourceTitleText: "Resources",
 						title: "Need counselling?",
 						callnowText: "Call now",
 						mainParagraph: "The Employee Assistance Program (EAP) is a voluntary program which provides support to employees and raises awareness about wellbeing.",
@@ -505,6 +512,7 @@ export class TranslationService {
 						
 				case "HarassmentPreventionProgram": {
 					return {
+resourceTitleText: "Resources",
 						title: "Are you being harassed?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "The Harassment Prevention Program provides information and advice to employees and managers/supervisors in cases of alleged harassment.",
@@ -559,6 +567,7 @@ export class TranslationService {
 						
 				case "NationalAttendanceManagementProgram": {
 					return {
+resourceTitleText: "Resources",
 						title: "Issues with attendance?",
 						callnowText: "Call now",
 						mainParagraph: "The National Attendance Management Program (NAMP) is designed to ensure consistent and fair management of employee attendance. It aims to improve attendance by managing each case individually when issues arise.",
@@ -613,6 +622,7 @@ export class TranslationService {
 						
 				case "ConflictManagement": {
 					return {
+resourceTitleText: "Resources",
 						title: "Dealing with conflict?",
 						callnowText: "Call now",
 						mainParagraph: "",
@@ -667,6 +677,7 @@ export class TranslationService {
 						
 				case "ReturnToWorkProgram": {
 					return {
+resourceTitleText: "Resources",
 						title: "Returning to work?",
 						callnowText: "Call now",
 						mainParagraph: "The Return to Work (RTW) Program provides employees who incur an injury or illness, work or non-work related, the support and assistance to return to fully productive employement, as soon as medically feasible.",
@@ -721,6 +732,7 @@ export class TranslationService {
 				
 				case "CrisisReferralCentre": {
 					return {
+resourceTitleText: "Resources",
 						title: "Are you in crisis?",
 						callnowText: "",
 						mainParagraph: "You can call the Crisis and Referral Centre 24 hours a day and 365 days a year at 1-800-268-7708 for immediate access to a professional counsellor at no cost.",
@@ -917,7 +929,7 @@ export class TranslationService {
 
 				case "resources.html": {
 					return {
-						resourceTitleText: "Ressources", // "Resources",
+						resourceTitleText: "Ressources",
 						resPageText: "Choissisez la liste de ressource qui s'applique à vous", //"Choose the resource list that applies to you"
 						buttonText1: "Êtes-vous en crise?", // "Employee Assistance Services",
 						buttonText1AriaLabel: "Services d'assistance pour employé button", // "Employee Assistance Services button"
@@ -946,7 +958,7 @@ export class TranslationService {
 				
 				case "employee.html": {
 					return {
-						resourceTitleText: "Ressources pour les employés",
+					resourceTitleText: "Ressources",
 						resPageText: "Choisissez la liste de ressources qui s’applique à vous",
 						buttonText1Desc: "Voic les programmes crées pour assister les employés à atteindre le bonheur et le bien-être au travai.",
 						buttonText1: "Programme d’aide aux employés",
@@ -961,7 +973,7 @@ export class TranslationService {
 				
 				case "employeeFamily.html": {
 					return {
-						resourceTitleText: "Famille des employés",
+						resourceTitleText: "Ressources",
 						resPageText: "Choisissez la liste de ressources qui s'applique.",
 						buttonText1: "Service d'écoute téléphonique en cas d'urgence",
 						buttonText2: "Programme d'aide aux employés",
@@ -984,6 +996,7 @@ export class TranslationService {
 				
 				case "EmployeeProtectionProtocol": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Êtes-vous menacé?",
 						callNowText: "Télephonez maintenant",
 						mainParagraph: "Le Protocole de protection des employés (PPE) peut aider à vous protéger, votre famille et vous, contre les menaces, le harcèlement criminel et l’intimidation. Il n’est pas rare d’être exposé à des comportements difficiles lorsque l’on intervient auprès de délinquants. Vous pouvez être confronté à différents niveaux de comportement, selon votre poste et votre milieu de travail. Toutes les menaces ne ont pas équivalent. Si vous jugez que la situation n’est pas « normale », vous devez la signaler. Que faire en cas de menace?",
@@ -1040,6 +1053,7 @@ export class TranslationService {
 				
 				case "EmployeeAssistanceServices": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Service d'aide aux employés",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Service d'aide aux employés (SAE) est le fournisseur national des services Programme d’aide aux employés (PAE) pour le Service Correctionel du Canada. Ils maintienent le plus haut standard de professionnalisme et confidentialité.",
@@ -1094,6 +1108,7 @@ export class TranslationService {
 					
 				case "CriticalIncidentStressManagement": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Avez-vous vécu un événement traumatisant?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme de gestion du stress à la suite d’un incident critique (PGSIC) est un système d’intervention en cas de crise conçu pour aider les employés du SCC et les membres de leur famille immédiate (conjoint et enfants vivant toujours à la maison). Ce service est offert à la suite d’incidents critiques, qui sont des événements traumatisants ne faisant pas partie de l’expérience humaine habituelle, comme des événements impliquant une violence extrême contre le personnel ou les délinquants, des blessures graves ou la mort, ou le fait d’être témoin de tels événements.",
@@ -1148,6 +1163,7 @@ export class TranslationService {
 				
 				case "DutyToAccomodate": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Avez-vous besoin des mesures d’adaptation?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme sur l’obligation de prendre des mesures d’adaptation (OPDMA) veille à ce que le SCC respecte son obligation légale en matière de mesures d’adaptation en milieu de travail au sens de la loi canadienne. Le programme vise à créer un milieu de travail sans obstacle, à prévenir la discrimination fondée sur un motif illicite et à veiller à ce que les besoins particuliers d’un employé soient satisfaits de façon à garantir l’égalité des chances pour tous.",
@@ -1202,6 +1218,7 @@ export class TranslationService {
 
 				case "EmployeeAssistanceProgram": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Besoin de soutien?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme d’aide aux employés (PAE) est un programme bénévole qui offre du soutien aux employés et les sensibilisent au bien-être.",
@@ -1256,6 +1273,7 @@ export class TranslationService {
 				
 				case "HarassmentPreventionProgram": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Êtes-vous victime d'harcèlement?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme sur la prévention du harcèlement (PPH) fournit des renseignements et des conseils aux employés et gestionnaires/superviseurs dans les cas présumés de harcèlement.",
@@ -1310,6 +1328,7 @@ export class TranslationService {
 				
 				case "NationalAttendanceManagementProgram": {
 					return {
+resourceTitleText: "Ressources",
 						title: "Avez-vous des problèmes liés à l’assiduité?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme national de gestion de l’assiduité (PNGA) est conçu pour assurer une gestion uniforme et équitable de l’assiduité des employés. Il vise à améliorer l’assiduité en gérant chaque cas individuellement lorsque des problèmes surviennent.",
@@ -1364,7 +1383,8 @@ export class TranslationService {
 				
 				case "ConflictManagement": {
 					return {
-						title: "Faisez-vous face à des conflits?",
+resourceTitleText: "Ressources",		
+				title: "Faisez-vous face à des conflits?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "",
 						mainParagraphAriaLabel: "",
@@ -1418,7 +1438,7 @@ export class TranslationService {
 				
 				case "ReturnToWorkProgram": {
 					return {
-						title: "Retournez-vous au travail?",
+resourceTitleText: "Ressources",						title: "Retournez-vous au travail?",
 						callnowText: "Télephonez maintenant",
 						mainParagraph: "Le Programme de retour au travail fournit aux employés qui subissent une blessure ou sont atteints d’une maladie personnelle ou professionnelle l’aide et le soutien nécessaires pour qu’ils puissent reprendre un travail productif dès que leur état de santé leur permet.",
 						mainParagraphAriaLabel: "Aperçu du Programme de retour au travail",
@@ -1472,7 +1492,7 @@ export class TranslationService {
 				
 				case "CrisisReferralCentre": {
 					return {
-						title: "Êtes-vous en crise?",
+resourceTitleText: "Ressources",						title: "Êtes-vous en crise?",
 						callnowText: "",
 						mainParagraph: "Vous pouvez appeler le Centre d’orientation et de gestion de crise, 24 heures sur 24, 365 jours par année, au 1-800-268-7708, pour obtenir immédiatement et sans frais l’aide d’un conseiller professionnel.",
 						mainParagraphAriaLabel: "Êtes-vous en crise Summary",

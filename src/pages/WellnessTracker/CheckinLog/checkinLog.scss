@@ -4,6 +4,11 @@ page-checkinLog {
         padding: 0;
     }    
     
+    .titleHeader {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
     /* Wellness Tracker Entry Colours */
     .moodText {
 	color: #FF9800;
@@ -30,6 +35,7 @@ page-checkinLog {
 		-webkit-align-items: center;
 		-ms-flex-align: center;
 		align-items: center;
+        height: 100%;
 	}
 
     .moodBackground {
@@ -124,7 +130,11 @@ page-checkinLog {
 	
 	.smallerFontSize {
 		.toolbar-title-md {
-			font-size: 14px !important;
+			font-size: 18px !important;
 		}
-	}
+  
+        .toolbar-title-ios {
+            font-size: 18px !important;
+        }
+    }
 }

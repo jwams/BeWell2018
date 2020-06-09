@@ -5,7 +5,9 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-title *ngIf="pageElementsLoaded">{{pageElements.resourceTitleText}}</ion-title>
+        <ion-title *ngIf="pageElementsLoaded" [ngClass]="{smallerFontSize: languageFlag == 'fr'}">
+            {{pageElements.resourceTitleText}}
+        </ion-title>
 		<ion-buttons end>
 			<button ion-button icon-only (click)="changeLanguage()">
 				<ion-icon name="globe" class="languageChangeButton"></ion-icon>

@@ -30,4 +30,14 @@ page-resources {
 	.label-md {
 		margin-right: 0 !important;
 	}
+ 
+    .smallerFontSize {
+          .toolbar-title-md {
+              font-size: 18px !important;
+          }
+    
+          .toolbar-title-ios {
+              font-size: 18px !important;
+          }
+      }
 }
