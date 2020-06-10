@@ -49,7 +49,7 @@ export class Dashboard {
     private openDatabase: SQLiteObject;
 
     // The actual content of the page, fetched via translationService.ts
-    private pageElements: Object;
+    private pageElements: any;
 
     // Controls whether our view is loaded based off of if pageElements has been loaded
     private pageElementsLoaded: boolean = false;
@@ -145,13 +145,15 @@ export class Dashboard {
 
         // Checks to see if a single checkbox has been checked, if not, show alert, then return false
         if(!this.moodCheckbox && !this.dietCheckbox && !this.sleepCheckbox) {
-			this.showAlert("Whoops!", "You don't have a score checkbox checked!", "Right on!");
+			if(this.pageElementsLoaded) {
+				this.showAlert(this.pageElements.whoopsText, this.pageElements.scoreCheckboxError, this.pageElements.rightonText);
+			}
 			return false;
         }
 
         // Checks to see if both dates are valid, if not, show alert, and return false
         if(this.fromDate == null || this.toDate == null) {
-			this.showAlert("Whoops!", "You haven't selected both a from-date and to-date", "For sure!");
+			this.showAlert(this.pageElements.whoopsText, this.pageElements.dateSelectionError, this.pageElements.forsureText);
 			return false;
         }
 

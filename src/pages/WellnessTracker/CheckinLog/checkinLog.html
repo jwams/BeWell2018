@@ -19,7 +19,7 @@
 		<ion-row justify-content-between *ngFor="let wellness of userRecords; index as i" [attr.data-index]="i" (click)="showHideElement(i)" [ngClass]="{blueBackground: showHideArray[i], noBackground: !showHideArray[i]}" class="lightBorder">
 			
 			<!-- Coloured Circle, depending on log score -->
-			<ion-col justify-content-center col-2>
+			<ion-col justify-content-start col-3>
 				<div *ngIf="totalScore(wellness.moodScore, wellness.sleepScore, wellness.dietScore) >= 23">
 					<img height="50px" width="50px" src="./assets/imgs/Badges/green.png">
 				</div>
@@ -37,11 +37,11 @@
 				</div>
 			</ion-col>
 			
-			<ion-col col-6>
+			<ion-col col-5>
 			
 				<!-- Date header -->
 				<ion-row class="fullHeight" justify-content-center [ngClass]="{headerDateTextTrue: showHideArray[i], headerDateTextFalse: !showHideArray[i], alignitemscenter: !showHideArray[i]}">
-					<ion-col col-auto>
+					<ion-col col-auto style="padding: 0">
 						{{formatDate(wellness.date)}}
 					</ion-col>
 				</ion-row>
@@ -52,7 +52,7 @@
 				
 				<!-- Time on the right -->
 				<ion-row justify-content-end [ngClass]="{alignitemscenter: !showHideArray[i]}">
-					<ion-col col-auto>
+					<ion-col col-auto style="padding: 0">
 						{{wellness.date | date: "H:mma"}}
 					</ion-col>
 					

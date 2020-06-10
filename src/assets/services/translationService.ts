@@ -150,7 +150,12 @@ export class TranslationService {
 						sleepText: "Sleep",
 						stressText: "Stress",
 						generateText: "Generate Graph",
-						chartText: "Chart"
+						chartText: "Chart",
+						scoreCheckboxError: "You don't have a score checkbox checked!",
+						whoopsText: "Whoops!",
+						rightonText: "Right on!",
+						dateSelectionError: "You haven't selected both a from-date and to-date!",
+						forsureText: "For sure!"
 					}
 				}
 						
@@ -910,7 +915,12 @@ resourceTitleText: "Resources",
 						sleepText: "Sommeil",
 						stressText: "Stress",
 						generateText: "Générer le graphe", //"Produire"
-						chartText: "Graphique"
+						chartText: "Graphique",
+						scoreCheckboxError: "Vous n'avez pas cochez au moins une des boîtes!",
+						whoopsText: "Oops!",
+						rightonText: "Super!",
+						dateSelectionError: "Vous n'avez pas sélectionnez les deux options 'De-la-date' et 'À-la- date",
+						forsureText: "C'est certain!"
 					}
 				}
 				
