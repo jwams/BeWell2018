@@ -97,7 +97,7 @@ export class TranslationService {
 
 				case "wellnesstracker.html": {
 					return {
-						wellnessTrackerTitleText: "Wellness Tracker",
+						wellnessTrackerTitleText: "Daily Tracker",
 						buttonText1: "Daily Log",
 						buttonText2: "Graph",
 					}
@@ -108,7 +108,7 @@ export class TranslationService {
 						homeTitleText: "Dashboard",
 						pageToolText1: "Try Our Tools!",
 						buttonText1: "Daily Check-In",
-						buttonText2: "Wellness Tracker",
+						buttonText2: "Daily Tracker",
 						buttonText3: "Log out",
 						buttonText4: "Resources"
 					}
@@ -872,7 +872,7 @@ resourceTitleText: "Resources",
 				
 				case "wellnesstracker.html": { 
 					return {
-						wellnessTrackerTitleText: "Journal de bord sur le bien-être", //Wellness Tracker / Wellness Journal / Wellness Tool / 
+						wellnessTrackerTitleText: "Suivi quotidien", //Wellness Tracker / Wellness Journal / Wellness Tool / 
 						buttonText1: "Registre quotidien", //"Journal quotidien",
 						buttonText2: "Graphique",
 					}
@@ -883,7 +883,7 @@ resourceTitleText: "Resources",
 						homeTitleText: "Tableau de bord",
 						pageToolText1: "Essayez nos outils!", //"Mettez à l'essai nos outils!"
 						buttonText1: "Vérification quotidienne", //"Vérification quotideienne"
-						buttonText2: "Journal de bord sur le bien-être",
+						buttonText2: "Suivi quotidien",
 						buttonText3: "Se déconnecter", //"Outils (Arrive bientôt!)"
 						buttonText4: "Ressources"
 					}
